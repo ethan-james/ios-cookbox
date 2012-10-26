@@ -1,0 +1,444 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		4716544A163B0E14006FA8E6 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 47165449163B0E14006FA8E6 /* UIKit.framework */; };
+		4716544C163B0E14006FA8E6 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4716544B163B0E14006FA8E6 /* Foundation.framework */; };
+		4716544E163B0E14006FA8E6 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4716544D163B0E14006FA8E6 /* CoreGraphics.framework */; };
+		47165454163B0E14006FA8E6 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 47165452163B0E14006FA8E6 /* InfoPlist.strings */; };
+		47165456163B0E14006FA8E6 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 47165455163B0E14006FA8E6 /* main.m */; };
+		4716545A163B0E14006FA8E6 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 47165459163B0E14006FA8E6 /* AppDelegate.m */; };
+		4716545D163B0E14006FA8E6 /* MainStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4716545B163B0E14006FA8E6 /* MainStoryboard.storyboard */; };
+		47165460163B0E14006FA8E6 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4716545F163B0E14006FA8E6 /* ViewController.m */; };
+		47165468163B0E14006FA8E6 /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 47165467163B0E14006FA8E6 /* SenTestingKit.framework */; };
+		47165469163B0E14006FA8E6 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 47165449163B0E14006FA8E6 /* UIKit.framework */; };
+		4716546A163B0E14006FA8E6 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4716544B163B0E14006FA8E6 /* Foundation.framework */; };
+		47165472163B0E14006FA8E6 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 47165470163B0E14006FA8E6 /* InfoPlist.strings */; };
+		47165475163B0E14006FA8E6 /* CookboxTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 47165474163B0E14006FA8E6 /* CookboxTests.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		4716546B163B0E14006FA8E6 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 4716543C163B0E14006FA8E6 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 47165444163B0E14006FA8E6;
+			remoteInfo = Cookbox;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		47165445163B0E14006FA8E6 /* Cookbox.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Cookbox.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		47165449163B0E14006FA8E6 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		4716544B163B0E14006FA8E6 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		4716544D163B0E14006FA8E6 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		47165451163B0E14006FA8E6 /* Cookbox-Info.plist */ = {isa = PBXFileReference; path = "Cookbox-Info.plist"; sourceTree = "<group>"; };
+		47165453163B0E14006FA8E6 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		47165455163B0E14006FA8E6 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		47165457163B0E14006FA8E6 /* Cookbox-Prefix.pch */ = {isa = PBXFileReference; path = "Cookbox-Prefix.pch"; sourceTree = "<group>"; };
+		47165458163B0E14006FA8E6 /* AppDelegate.h */ = {isa = PBXFileReference; path = AppDelegate.h; sourceTree = "<group>"; };
+		47165459163B0E14006FA8E6 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		4716545C163B0E14006FA8E6 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/MainStoryboard.storyboard; sourceTree = "<group>"; };
+		4716545E163B0E14006FA8E6 /* ViewController.h */ = {isa = PBXFileReference; path = ViewController.h; sourceTree = "<group>"; };
+		4716545F163B0E14006FA8E6 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		47165466163B0E14006FA8E6 /* CookboxTests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CookboxTests.octest; sourceTree = BUILT_PRODUCTS_DIR; };
+		47165467163B0E14006FA8E6 /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
+		4716546F163B0E14006FA8E6 /* CookboxTests-Info.plist */ = {isa = PBXFileReference; path = "CookboxTests-Info.plist"; sourceTree = "<group>"; };
+		47165471163B0E14006FA8E6 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		47165473163B0E14006FA8E6 /* CookboxTests.h */ = {isa = PBXFileReference; path = CookboxTests.h; sourceTree = "<group>"; };
+		47165474163B0E14006FA8E6 /* CookboxTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CookboxTests.m; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		47165442163B0E14006FA8E6 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4716544A163B0E14006FA8E6 /* UIKit.framework in Frameworks */,
+				4716544C163B0E14006FA8E6 /* Foundation.framework in Frameworks */,
+				4716544E163B0E14006FA8E6 /* CoreGraphics.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		47165462163B0E14006FA8E6 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				47165468163B0E14006FA8E6 /* SenTestingKit.framework in Frameworks */,
+				47165469163B0E14006FA8E6 /* UIKit.framework in Frameworks */,
+				4716546A163B0E14006FA8E6 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		4716543A163B0E14006FA8E6 = {
+			isa = PBXGroup;
+			children = (
+				4716544F163B0E14006FA8E6 /* Cookbox */,
+				4716546D163B0E14006FA8E6 /* CookboxTests */,
+				47165448163B0E14006FA8E6 /* Frameworks */,
+				47165446163B0E14006FA8E6 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		47165446163B0E14006FA8E6 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				47165445163B0E14006FA8E6 /* Cookbox.app */,
+				47165466163B0E14006FA8E6 /* CookboxTests.octest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		47165448163B0E14006FA8E6 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				47165449163B0E14006FA8E6 /* UIKit.framework */,
+				4716544B163B0E14006FA8E6 /* Foundation.framework */,
+				4716544D163B0E14006FA8E6 /* CoreGraphics.framework */,
+				47165467163B0E14006FA8E6 /* SenTestingKit.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		4716544F163B0E14006FA8E6 /* Cookbox */ = {
+			isa = PBXGroup;
+			children = (
+				47165458163B0E14006FA8E6 /* AppDelegate.h */,
+				47165459163B0E14006FA8E6 /* AppDelegate.m */,
+				4716545B163B0E14006FA8E6 /* MainStoryboard.storyboard */,
+				4716545E163B0E14006FA8E6 /* ViewController.h */,
+				4716545F163B0E14006FA8E6 /* ViewController.m */,
+				47165450163B0E14006FA8E6 /* Supporting Files */,
+			);
+			path = Cookbox;
+			sourceTree = "<group>";
+		};
+		47165450163B0E14006FA8E6 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				47165451163B0E14006FA8E6 /* Cookbox-Info.plist */,
+				47165452163B0E14006FA8E6 /* InfoPlist.strings */,
+				47165455163B0E14006FA8E6 /* main.m */,
+				47165457163B0E14006FA8E6 /* Cookbox-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		4716546D163B0E14006FA8E6 /* CookboxTests */ = {
+			isa = PBXGroup;
+			children = (
+				47165473163B0E14006FA8E6 /* CookboxTests.h */,
+				47165474163B0E14006FA8E6 /* CookboxTests.m */,
+				4716546E163B0E14006FA8E6 /* Supporting Files */,
+			);
+			path = CookboxTests;
+			sourceTree = "<group>";
+		};
+		4716546E163B0E14006FA8E6 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				4716546F163B0E14006FA8E6 /* CookboxTests-Info.plist */,
+				47165470163B0E14006FA8E6 /* InfoPlist.strings */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		47165444163B0E14006FA8E6 /* Cookbox */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 47165478163B0E14006FA8E6 /* Build configuration list for PBXNativeTarget "Cookbox" */;
+			buildPhases = (
+				47165441163B0E14006FA8E6 /* Sources */,
+				47165442163B0E14006FA8E6 /* Frameworks */,
+				47165443163B0E14006FA8E6 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Cookbox;
+			productName = Cookbox;
+			productReference = 47165445163B0E14006FA8E6 /* Cookbox.app */;
+			productType = "com.apple.product-type.application";
+		};
+		47165465163B0E14006FA8E6 /* CookboxTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 4716547B163B0E14006FA8E6 /* Build configuration list for PBXNativeTarget "CookboxTests" */;
+			buildPhases = (
+				47165461163B0E14006FA8E6 /* Sources */,
+				47165462163B0E14006FA8E6 /* Frameworks */,
+				47165463163B0E14006FA8E6 /* Resources */,
+				47165464163B0E14006FA8E6 /* ShellScript */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				4716546C163B0E14006FA8E6 /* PBXTargetDependency */,
+			);
+			name = CookboxTests;
+			productName = CookboxTests;
+			productReference = 47165466163B0E14006FA8E6 /* CookboxTests.octest */;
+			productType = "com.apple.product-type.bundle";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		4716543C163B0E14006FA8E6 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0430;
+			};
+			buildConfigurationList = 4716543F163B0E14006FA8E6 /* Build configuration list for PBXProject "Cookbox" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 4716543A163B0E14006FA8E6;
+			productRefGroup = 47165446163B0E14006FA8E6 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				47165444163B0E14006FA8E6 /* Cookbox */,
+				47165465163B0E14006FA8E6 /* CookboxTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		47165443163B0E14006FA8E6 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				47165454163B0E14006FA8E6 /* InfoPlist.strings in Resources */,
+				4716545D163B0E14006FA8E6 /* MainStoryboard.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		47165463163B0E14006FA8E6 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				47165472163B0E14006FA8E6 /* InfoPlist.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		47165464163B0E14006FA8E6 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Run the unit tests in this test bundle.\n\"${SYSTEM_DEVELOPER_DIR}/Tools/RunUnitTests\"\n";
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		47165441163B0E14006FA8E6 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				47165456163B0E14006FA8E6 /* main.m in Sources */,
+				4716545A163B0E14006FA8E6 /* AppDelegate.m in Sources */,
+				47165460163B0E14006FA8E6 /* ViewController.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		47165461163B0E14006FA8E6 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				47165475163B0E14006FA8E6 /* CookboxTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		4716546C163B0E14006FA8E6 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 47165444163B0E14006FA8E6 /* Cookbox */;
+			targetProxy = 4716546B163B0E14006FA8E6 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		47165452163B0E14006FA8E6 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				47165453163B0E14006FA8E6 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		4716545B163B0E14006FA8E6 /* MainStoryboard.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				4716545C163B0E14006FA8E6 /* en */,
+			);
+			name = MainStoryboard.storyboard;
+			sourceTree = "<group>";
+		};
+		47165470163B0E14006FA8E6 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				47165471163B0E14006FA8E6 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		47165476163B0E14006FA8E6 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		47165477163B0E14006FA8E6 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
+				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		47165479163B0E14006FA8E6 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Cookbox/Cookbox-Prefix.pch";
+				INFOPLIST_FILE = "Cookbox/Cookbox-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		4716547A163B0E14006FA8E6 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Cookbox/Cookbox-Prefix.pch";
+				INFOPLIST_FILE = "Cookbox/Cookbox-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+		4716547C163B0E14006FA8E6 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/Cookbox.app/Cookbox";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(DEVELOPER_LIBRARY_DIR)/Frameworks",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Cookbox/Cookbox-Prefix.pch";
+				INFOPLIST_FILE = "CookboxTests/CookboxTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = octest;
+			};
+			name = Debug;
+		};
+		4716547D163B0E14006FA8E6 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/Cookbox.app/Cookbox";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(DEVELOPER_LIBRARY_DIR)/Frameworks",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Cookbox/Cookbox-Prefix.pch";
+				INFOPLIST_FILE = "CookboxTests/CookboxTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = octest;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		4716543F163B0E14006FA8E6 /* Build configuration list for PBXProject "Cookbox" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				47165476163B0E14006FA8E6 /* Debug */,
+				47165477163B0E14006FA8E6 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		47165478163B0E14006FA8E6 /* Build configuration list for PBXNativeTarget "Cookbox" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				47165479163B0E14006FA8E6 /* Debug */,
+				4716547A163B0E14006FA8E6 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		4716547B163B0E14006FA8E6 /* Build configuration list for PBXNativeTarget "CookboxTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				4716547C163B0E14006FA8E6 /* Debug */,
+				4716547D163B0E14006FA8E6 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 4716543C163B0E14006FA8E6 /* Project object */;
+}
