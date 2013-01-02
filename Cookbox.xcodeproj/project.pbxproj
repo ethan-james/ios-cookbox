@@ -14,12 +14,16 @@
 		47165456163B0E14006FA8E6 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 47165455163B0E14006FA8E6 /* main.m */; };
 		4716545A163B0E14006FA8E6 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 47165459163B0E14006FA8E6 /* AppDelegate.m */; };
 		4716545D163B0E14006FA8E6 /* MainStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4716545B163B0E14006FA8E6 /* MainStoryboard.storyboard */; };
-		47165460163B0E14006FA8E6 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4716545F163B0E14006FA8E6 /* ViewController.m */; };
 		47165468163B0E14006FA8E6 /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 47165467163B0E14006FA8E6 /* SenTestingKit.framework */; };
 		47165469163B0E14006FA8E6 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 47165449163B0E14006FA8E6 /* UIKit.framework */; };
 		4716546A163B0E14006FA8E6 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4716544B163B0E14006FA8E6 /* Foundation.framework */; };
 		47165472163B0E14006FA8E6 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 47165470163B0E14006FA8E6 /* InfoPlist.strings */; };
 		47165475163B0E14006FA8E6 /* CookboxTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 47165474163B0E14006FA8E6 /* CookboxTests.m */; };
+		479410301694C1DC00333176 /* RecipeListController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4794102F1694C1DC00333176 /* RecipeListController.m */; };
+		479410321694C2F700333176 /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 479410311694C2F700333176 /* Settings.bundle */; };
+		479410381694C72300333176 /* DropboxSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 479410371694C72300333176 /* DropboxSDK.framework */; };
+		4794103A1694C7E500333176 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 479410391694C7E500333176 /* Security.framework */; };
+		4794103C1694C7EF00333176 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4794103B1694C7EF00333176 /* QuartzCore.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -37,21 +41,25 @@
 		47165449163B0E14006FA8E6 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		4716544B163B0E14006FA8E6 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		4716544D163B0E14006FA8E6 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
-		47165451163B0E14006FA8E6 /* Cookbox-Info.plist */ = {isa = PBXFileReference; path = "Cookbox-Info.plist"; sourceTree = "<group>"; };
+		47165451163B0E14006FA8E6 /* Cookbox-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Cookbox-Info.plist"; sourceTree = "<group>"; };
 		47165453163B0E14006FA8E6 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		47165455163B0E14006FA8E6 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		47165457163B0E14006FA8E6 /* Cookbox-Prefix.pch */ = {isa = PBXFileReference; path = "Cookbox-Prefix.pch"; sourceTree = "<group>"; };
-		47165458163B0E14006FA8E6 /* AppDelegate.h */ = {isa = PBXFileReference; path = AppDelegate.h; sourceTree = "<group>"; };
+		47165457163B0E14006FA8E6 /* Cookbox-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Cookbox-Prefix.pch"; sourceTree = "<group>"; };
+		47165458163B0E14006FA8E6 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		47165459163B0E14006FA8E6 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		4716545C163B0E14006FA8E6 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/MainStoryboard.storyboard; sourceTree = "<group>"; };
-		4716545E163B0E14006FA8E6 /* ViewController.h */ = {isa = PBXFileReference; path = ViewController.h; sourceTree = "<group>"; };
-		4716545F163B0E14006FA8E6 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		47165466163B0E14006FA8E6 /* CookboxTests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CookboxTests.octest; sourceTree = BUILT_PRODUCTS_DIR; };
 		47165467163B0E14006FA8E6 /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
-		4716546F163B0E14006FA8E6 /* CookboxTests-Info.plist */ = {isa = PBXFileReference; path = "CookboxTests-Info.plist"; sourceTree = "<group>"; };
+		4716546F163B0E14006FA8E6 /* CookboxTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "CookboxTests-Info.plist"; sourceTree = "<group>"; };
 		47165471163B0E14006FA8E6 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		47165473163B0E14006FA8E6 /* CookboxTests.h */ = {isa = PBXFileReference; path = CookboxTests.h; sourceTree = "<group>"; };
+		47165473163B0E14006FA8E6 /* CookboxTests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CookboxTests.h; sourceTree = "<group>"; };
 		47165474163B0E14006FA8E6 /* CookboxTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CookboxTests.m; sourceTree = "<group>"; };
+		4794102E1694C1DC00333176 /* RecipeListController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RecipeListController.h; sourceTree = "<group>"; };
+		4794102F1694C1DC00333176 /* RecipeListController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RecipeListController.m; sourceTree = "<group>"; };
+		479410311694C2F700333176 /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
+		479410371694C72300333176 /* DropboxSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = DropboxSDK.framework; sourceTree = "<group>"; };
+		479410391694C7E500333176 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
+		4794103B1694C7EF00333176 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -59,9 +67,12 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4794103C1694C7EF00333176 /* QuartzCore.framework in Frameworks */,
+				4794103A1694C7E500333176 /* Security.framework in Frameworks */,
 				4716544A163B0E14006FA8E6 /* UIKit.framework in Frameworks */,
 				4716544C163B0E14006FA8E6 /* Foundation.framework in Frameworks */,
 				4716544E163B0E14006FA8E6 /* CoreGraphics.framework in Frameworks */,
+				479410381694C72300333176 /* DropboxSDK.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -81,6 +92,8 @@
 		4716543A163B0E14006FA8E6 = {
 			isa = PBXGroup;
 			children = (
+				4794103B1694C7EF00333176 /* QuartzCore.framework */,
+				479410391694C7E500333176 /* Security.framework */,
 				4716544F163B0E14006FA8E6 /* Cookbox */,
 				4716546D163B0E14006FA8E6 /* CookboxTests */,
 				47165448163B0E14006FA8E6 /* Frameworks */,
@@ -100,6 +113,7 @@
 		47165448163B0E14006FA8E6 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				479410371694C72300333176 /* DropboxSDK.framework */,
 				47165449163B0E14006FA8E6 /* UIKit.framework */,
 				4716544B163B0E14006FA8E6 /* Foundation.framework */,
 				4716544D163B0E14006FA8E6 /* CoreGraphics.framework */,
@@ -114,9 +128,10 @@
 				47165458163B0E14006FA8E6 /* AppDelegate.h */,
 				47165459163B0E14006FA8E6 /* AppDelegate.m */,
 				4716545B163B0E14006FA8E6 /* MainStoryboard.storyboard */,
-				4716545E163B0E14006FA8E6 /* ViewController.h */,
-				4716545F163B0E14006FA8E6 /* ViewController.m */,
 				47165450163B0E14006FA8E6 /* Supporting Files */,
+				4794102E1694C1DC00333176 /* RecipeListController.h */,
+				4794102F1694C1DC00333176 /* RecipeListController.m */,
+				479410311694C2F700333176 /* Settings.bundle */,
 			);
 			path = Cookbox;
 			sourceTree = "<group>";
@@ -223,6 +238,7 @@
 			files = (
 				47165454163B0E14006FA8E6 /* InfoPlist.strings in Resources */,
 				4716545D163B0E14006FA8E6 /* MainStoryboard.storyboard in Resources */,
+				479410321694C2F700333176 /* Settings.bundle in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -259,7 +275,7 @@
 			files = (
 				47165456163B0E14006FA8E6 /* main.m in Sources */,
 				4716545A163B0E14006FA8E6 /* AppDelegate.m in Sources */,
-				47165460163B0E14006FA8E6 /* ViewController.m in Sources */,
+				479410301694C1DC00333176 /* RecipeListController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -357,6 +373,10 @@
 		47165479163B0E14006FA8E6 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)\"",
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Cookbox/Cookbox-Prefix.pch";
 				INFOPLIST_FILE = "Cookbox/Cookbox-Info.plist";
@@ -368,6 +388,10 @@
 		4716547A163B0E14006FA8E6 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)\"",
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Cookbox/Cookbox-Prefix.pch";
 				INFOPLIST_FILE = "Cookbox/Cookbox-Info.plist";
@@ -429,6 +453,7 @@
 				4716547A163B0E14006FA8E6 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		4716547B163B0E14006FA8E6 /* Build configuration list for PBXNativeTarget "CookboxTests" */ = {
 			isa = XCConfigurationList;
@@ -437,6 +462,7 @@
 				4716547D163B0E14006FA8E6 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
