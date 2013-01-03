@@ -8,6 +8,7 @@
 
 #import "RecipeListController.h"
 #import <DropboxSDK/DBDeltaEntry.h>
+#import "Recipe.h"
 
 @interface RecipeListController ()
 
@@ -17,12 +18,12 @@
 
 @synthesize recipes;
 DBRestClient *restClient;
+NSMutableDictionary *dropboxDictionary;
 
 - (id)initWithStyle:(UITableViewStyle)style
 {
     self = [super initWithStyle:style];
     if (self) {
-        // Custom initialization
     }
     return self;
 }
@@ -37,6 +38,7 @@ DBRestClient *restClient;
     // self.clearsSelectionOnViewWillAppear = NO;
  
     self.navigationItem.leftBarButtonItem = sync;
+    dropboxDictionary = [[NSMutableDictionary alloc] init];
 }
 
 - (void)didReceiveMemoryWarning
@@ -64,6 +66,10 @@ DBRestClient *restClient;
     }
 }
 
+- (void)reloadRecipes {
+    [self setRecipes:[Recipe getList]];
+}
+
 - (void)syncRecipes {
     NSString *cursor = [[NSUserDefaults standardUserDefaults] stringForKey:@"cursor"];
     [[self restClient] loadDelta:cursor];
@@ -86,6 +92,7 @@ DBRestClient *restClient;
     for (DBDeltaEntry *file in entries) {
         NSString *path = [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:file.lowercasePath];
         if(!file.metadata.isDirectory){
+            [dropboxDictionary setObject:file forKey:path];
             [[self restClient] loadFile:file.lowercasePath intoPath:path];
         }
     }
@@ -94,7 +101,13 @@ DBRestClient *restClient;
 -(void)restClient:(DBRestClient *)client loadedFile:(NSString *)destPath {
     NSError *error;
     NSString *md = [NSString stringWithContentsOfFile:destPath encoding:NSStringEncodingConversionAllowLossy error:&error];
-    NSLog(@"%@", md);
+    DBDeltaEntry *file = [dropboxDictionary objectForKey:destPath];
+    Recipe *r = [Recipe findOrCreate:file.lowercasePath bySource:@"dropbox"];
+    
+    [r update:md];
+    [r save];
+    
+    [self.tableView reloadData];
 }
 
 #pragma mark - Table view data source
@@ -114,7 +127,7 @@ DBRestClient *restClient;
     static NSString *CellIdentifier = @"Cell";
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
     
-    // Configure the cell...
+    [cell.textLabel setText:[[recipes objectAtIndex:indexPath.row] name]];
     
     return cell;
 }

@@ -19,6 +19,11 @@
 		4716546A163B0E14006FA8E6 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4716544B163B0E14006FA8E6 /* Foundation.framework */; };
 		47165472163B0E14006FA8E6 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 47165470163B0E14006FA8E6 /* InfoPlist.strings */; };
 		47165475163B0E14006FA8E6 /* CookboxTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 47165474163B0E14006FA8E6 /* CookboxTests.m */; };
+		4742B3461695DB7700E076AB /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 4742B3441695DB7700E076AB /* Model.xcdatamodeld */; };
+		4742B34E1695E33700E076AB /* RecipeSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 4742B34D1695E33700E076AB /* RecipeSource.m */; };
+		4742B3501695E3D000E076AB /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4742B34F1695E3D000E076AB /* CoreData.framework */; };
+		4742B3531695E41300E076AB /* Recipe.m in Sources */ = {isa = PBXBuildFile; fileRef = 4742B3521695E41300E076AB /* Recipe.m */; };
+		4742B3561695E42100E076AB /* Ingredient.m in Sources */ = {isa = PBXBuildFile; fileRef = 4742B3551695E42100E076AB /* Ingredient.m */; };
 		479410301694C1DC00333176 /* RecipeListController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4794102F1694C1DC00333176 /* RecipeListController.m */; };
 		479410321694C2F700333176 /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 479410311694C2F700333176 /* Settings.bundle */; };
 		479410381694C72300333176 /* DropboxSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 479410371694C72300333176 /* DropboxSDK.framework */; };
@@ -54,6 +59,14 @@
 		47165471163B0E14006FA8E6 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		47165473163B0E14006FA8E6 /* CookboxTests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CookboxTests.h; sourceTree = "<group>"; };
 		47165474163B0E14006FA8E6 /* CookboxTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CookboxTests.m; sourceTree = "<group>"; };
+		4742B3451695DB7700E076AB /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
+		4742B34C1695E33700E076AB /* RecipeSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RecipeSource.h; sourceTree = "<group>"; };
+		4742B34D1695E33700E076AB /* RecipeSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RecipeSource.m; sourceTree = "<group>"; };
+		4742B34F1695E3D000E076AB /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
+		4742B3511695E41300E076AB /* Recipe.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Recipe.h; sourceTree = "<group>"; };
+		4742B3521695E41300E076AB /* Recipe.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Recipe.m; sourceTree = "<group>"; };
+		4742B3541695E42100E076AB /* Ingredient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Ingredient.h; sourceTree = "<group>"; };
+		4742B3551695E42100E076AB /* Ingredient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Ingredient.m; sourceTree = "<group>"; };
 		4794102E1694C1DC00333176 /* RecipeListController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RecipeListController.h; sourceTree = "<group>"; };
 		4794102F1694C1DC00333176 /* RecipeListController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RecipeListController.m; sourceTree = "<group>"; };
 		479410311694C2F700333176 /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
@@ -67,6 +80,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4742B3501695E3D000E076AB /* CoreData.framework in Frameworks */,
 				4794103C1694C7EF00333176 /* QuartzCore.framework in Frameworks */,
 				4794103A1694C7E500333176 /* Security.framework in Frameworks */,
 				4716544A163B0E14006FA8E6 /* UIKit.framework in Frameworks */,
@@ -92,6 +106,7 @@
 		4716543A163B0E14006FA8E6 = {
 			isa = PBXGroup;
 			children = (
+				4742B34F1695E3D000E076AB /* CoreData.framework */,
 				4794103B1694C7EF00333176 /* QuartzCore.framework */,
 				479410391694C7E500333176 /* Security.framework */,
 				4716544F163B0E14006FA8E6 /* Cookbox */,
@@ -132,6 +147,13 @@
 				4794102E1694C1DC00333176 /* RecipeListController.h */,
 				4794102F1694C1DC00333176 /* RecipeListController.m */,
 				479410311694C2F700333176 /* Settings.bundle */,
+				4742B3441695DB7700E076AB /* Model.xcdatamodeld */,
+				4742B3541695E42100E076AB /* Ingredient.h */,
+				4742B3551695E42100E076AB /* Ingredient.m */,
+				4742B3511695E41300E076AB /* Recipe.h */,
+				4742B3521695E41300E076AB /* Recipe.m */,
+				4742B34C1695E33700E076AB /* RecipeSource.h */,
+				4742B34D1695E33700E076AB /* RecipeSource.m */,
 			);
 			path = Cookbox;
 			sourceTree = "<group>";
@@ -276,6 +298,10 @@
 				47165456163B0E14006FA8E6 /* main.m in Sources */,
 				4716545A163B0E14006FA8E6 /* AppDelegate.m in Sources */,
 				479410301694C1DC00333176 /* RecipeListController.m in Sources */,
+				4742B3461695DB7700E076AB /* Model.xcdatamodeld in Sources */,
+				4742B34E1695E33700E076AB /* RecipeSource.m in Sources */,
+				4742B3531695E41300E076AB /* Recipe.m in Sources */,
+				4742B3561695E42100E076AB /* Ingredient.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -465,6 +491,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		4742B3441695DB7700E076AB /* Model.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				4742B3451695DB7700E076AB /* Model.xcdatamodel */,
+			);
+			currentVersion = 4742B3451695DB7700E076AB /* Model.xcdatamodel */;
+			path = Model.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 4716543C163B0E14006FA8E6 /* Project object */;
 }
