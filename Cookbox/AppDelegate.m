@@ -56,15 +56,20 @@
 #pragma mark dropbox
 
 - (BOOL)application:(UIApplication *)application handleOpenURL:(NSURL *)url {
+    UINavigationController *nav = (UINavigationController *)[[[UIApplication sharedApplication] keyWindow] rootViewController];
+
     if ([[DBSession sharedSession] handleOpenURL:url]) {
         if ([[DBSession sharedSession] isLinked]) {
-            UINavigationController *nav = (UINavigationController *)[[[UIApplication sharedApplication] keyWindow] rootViewController];
             RecipeListController *c = (RecipeListController *)[nav presentedViewController];
             [c syncRecipes];
         }
         return YES;
     }
-    // Add whatever other url handling code your app requires here
+    if ([[url scheme] isEqualToString:@"cookbox"]) {
+        NSError *error;
+        NSURL *rurl = [[NSURL alloc] initWithScheme:@"http" host:[url host] path:[url path]];
+        NSString *html = [NSString stringWithContentsOfURL:rurl encoding:NSStringEncodingConversionAllowLossy error:&error];
+    }
     return NO;
 }
 

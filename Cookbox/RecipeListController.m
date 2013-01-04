@@ -35,7 +35,7 @@ NSInteger totalFiles = 0;
 {
     [super viewDidLoad];
     
-    UIBarButtonItem *sync = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemOrganize target:self action:@selector(didPressLink)];
+    UIBarButtonItem *sync = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemRefresh target:self action:@selector(didPressLink)];
  
     self.navigationItem.leftBarButtonItem = sync;
     dropboxDictionary = [[NSMutableDictionary alloc] init];
