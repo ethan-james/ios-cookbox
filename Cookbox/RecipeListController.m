@@ -7,6 +7,7 @@
 //
 
 #import "RecipeListController.h"
+#import "RecipeController.h"
 #import <DropboxSDK/DBDeltaEntry.h>
 #import "Recipe.h"
 
@@ -19,6 +20,8 @@
 @synthesize recipes;
 DBRestClient *restClient;
 NSMutableDictionary *dropboxDictionary;
+NSInteger fileCount = 0;
+NSInteger totalFiles = 0;
 
 - (id)initWithStyle:(UITableViewStyle)style
 {
@@ -33,12 +36,23 @@ NSMutableDictionary *dropboxDictionary;
     [super viewDidLoad];
     
     UIBarButtonItem *sync = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemOrganize target:self action:@selector(didPressLink)];
-    
-    // Uncomment the following line to preserve selection between presentations.
-    // self.clearsSelectionOnViewWillAppear = NO;
  
     self.navigationItem.leftBarButtonItem = sync;
     dropboxDictionary = [[NSMutableDictionary alloc] init];
+}
+
+- (void)viewDidAppear:(BOOL)animated {
+    [self reloadRecipes];
+    [super viewDidAppear:animated];
+    [self.tableView reloadData];
+}
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(UITableViewCell *)sender {
+    if ([segue.identifier isEqualToString:@"OpenRecipe"]) {
+        NSInteger row = [[self.tableView indexPathForCell:sender] row];
+        RecipeController *rc = segue.destinationViewController;
+        [rc setRecipe:[recipes objectAtIndex:row]];
+    }
 }
 
 - (void)didReceiveMemoryWarning
@@ -68,10 +82,12 @@ NSMutableDictionary *dropboxDictionary;
 
 - (void)reloadRecipes {
     [self setRecipes:[Recipe getList]];
+    [self setTitle:[NSString stringWithFormat:@"%d recipes", [recipes count]]];
 }
 
 - (void)syncRecipes {
     NSString *cursor = [[NSUserDefaults standardUserDefaults] stringForKey:@"cursor"];
+    [self setTitle:@"Syncing recipes..."];
     [[self restClient] loadDelta:cursor];
 }
 
@@ -89,6 +105,9 @@ NSMutableDictionary *dropboxDictionary;
 }
 
 -(void)restClient:(DBRestClient *)client loadedDeltaEntries:(NSArray *)entries reset:(BOOL)shouldReset cursor:(NSString *)cursor hasMore:(BOOL)hasMore{
+    fileCount = totalFiles = [entries count];
+    [self setTitle:[NSString stringWithFormat:@"Syncing recipes (0 / %d)", totalFiles]];
+
     for (DBDeltaEntry *file in entries) {
         NSString *path = [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:file.lowercasePath];
         if(!file.metadata.isDirectory){
@@ -106,8 +125,13 @@ NSMutableDictionary *dropboxDictionary;
     
     [r update:md];
     [r save];
-    
-    [self.tableView reloadData];
+
+    fileCount--;
+    [self setTitle:[NSString stringWithFormat:@"Syncing recipes (%d / %d)", totalFiles - fileCount, totalFiles]];
+    if (fileCount == 0) {
+        [self reloadRecipes];
+        [self.tableView reloadData];
+    }
 }
 
 #pragma mark - Table view data source
@@ -175,13 +199,7 @@ NSMutableDictionary *dropboxDictionary;
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    // Navigation logic may go here. Create and push another view controller.
-    /*
-     <#DetailViewController#> *detailViewController = [[<#DetailViewController#> alloc] initWithNibName:@"<#Nib name#>" bundle:nil];
-     // ...
-     // Pass the selected object to the new view controller.
-     [self.navigationController pushViewController:detailViewController animated:YES];
-     */
+    [self performSegueWithIdentifier:@"OpenRecipe" sender:[self.tableView cellForRowAtIndexPath:indexPath]];
 }
 
 @end

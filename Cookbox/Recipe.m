@@ -8,8 +8,8 @@
 
 #import "Recipe.h"
 #import "AppDelegate.h"
-#import "RecipeSOurce.h"
-
+#import "RecipeSource.h"
+#import <GHMarkdownParser/GHMarkdownParser/GHMarkdownParser.h>
 
 @implementation Recipe
 
@@ -81,6 +81,14 @@ NSManagedObjectContext *_managedObjectContext;
 # pragma mark CRUD helpers
 
 - (void)update:(NSString *)markdown {
+    NSError *error;
+    NSRegularExpression *regex = [NSRegularExpression regularExpressionWithPattern:@"# (.+) #" options:NSRegularExpressionCaseInsensitive error:&error];
+    NSRange range = NSMakeRange(0, [markdown length]);
+    NSTextCheckingResult *match = [regex firstMatchInString:markdown options:NSMatchingWithoutAnchoringBounds range:range];
+    NSRange nameRange = [match rangeAtIndex:1];
+    NSString *name = [markdown substringWithRange:nameRange];
+    
+    [self setName:name];
     [self setMarkdown:markdown];
 }
 
@@ -88,6 +96,10 @@ NSManagedObjectContext *_managedObjectContext;
     NSError *error;
     [[self managedObjectContext] save:&error];
     return error;
+}
+
+- (NSString *)asHTML {
+    return [GHMarkdownParser flavoredHTMLStringFromMarkdownString:[self markdown]];
 }
 
 @end

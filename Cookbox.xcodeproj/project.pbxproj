@@ -11,7 +11,6 @@
 		4716544C163B0E14006FA8E6 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4716544B163B0E14006FA8E6 /* Foundation.framework */; };
 		4716544E163B0E14006FA8E6 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4716544D163B0E14006FA8E6 /* CoreGraphics.framework */; };
 		47165454163B0E14006FA8E6 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 47165452163B0E14006FA8E6 /* InfoPlist.strings */; };
-		47165456163B0E14006FA8E6 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 47165455163B0E14006FA8E6 /* main.m */; };
 		4716545A163B0E14006FA8E6 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 47165459163B0E14006FA8E6 /* AppDelegate.m */; };
 		4716545D163B0E14006FA8E6 /* MainStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4716545B163B0E14006FA8E6 /* MainStoryboard.storyboard */; };
 		47165468163B0E14006FA8E6 /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 47165467163B0E14006FA8E6 /* SenTestingKit.framework */; };
@@ -24,11 +23,15 @@
 		4742B3501695E3D000E076AB /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4742B34F1695E3D000E076AB /* CoreData.framework */; };
 		4742B3531695E41300E076AB /* Recipe.m in Sources */ = {isa = PBXBuildFile; fileRef = 4742B3521695E41300E076AB /* Recipe.m */; };
 		4742B3561695E42100E076AB /* Ingredient.m in Sources */ = {isa = PBXBuildFile; fileRef = 4742B3551695E42100E076AB /* Ingredient.m */; };
+		474853B616974F4F00EA7360 /* libGHMarkdownParser.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 474853B316974F3A00EA7360 /* libGHMarkdownParser.a */; };
+		474853B81697503700EA7360 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 474853B71697503700EA7360 /* Default-568h@2x.png */; };
+		474853BB16976A5600EA7360 /* RecipeController.m in Sources */ = {isa = PBXBuildFile; fileRef = 474853BA16976A5600EA7360 /* RecipeController.m */; };
 		479410301694C1DC00333176 /* RecipeListController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4794102F1694C1DC00333176 /* RecipeListController.m */; };
 		479410321694C2F700333176 /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 479410311694C2F700333176 /* Settings.bundle */; };
 		479410381694C72300333176 /* DropboxSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 479410371694C72300333176 /* DropboxSDK.framework */; };
 		4794103A1694C7E500333176 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 479410391694C7E500333176 /* Security.framework */; };
 		4794103C1694C7EF00333176 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4794103B1694C7EF00333176 /* QuartzCore.framework */; };
+		47DD9D8D16972D4F00499581 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 47DD9D8C16972D4F00499581 /* main.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -39,6 +42,20 @@
 			remoteGlobalIDString = 47165444163B0E14006FA8E6;
 			remoteInfo = Cookbox;
 		};
+		474853B216974F3A00EA7360 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 474853AB16974F3A00EA7360 /* GHMarkdownParser.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = A7C525F213E6FE1A0003EEE5;
+			remoteInfo = GHMarkdownParser;
+		};
+		474853B416974F4500EA7360 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 474853AB16974F3A00EA7360 /* GHMarkdownParser.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = A7C525F113E6FE1A0003EEE5;
+			remoteInfo = GHMarkdownParser;
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
@@ -48,7 +65,6 @@
 		4716544D163B0E14006FA8E6 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		47165451163B0E14006FA8E6 /* Cookbox-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Cookbox-Info.plist"; sourceTree = "<group>"; };
 		47165453163B0E14006FA8E6 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		47165455163B0E14006FA8E6 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		47165457163B0E14006FA8E6 /* Cookbox-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Cookbox-Prefix.pch"; sourceTree = "<group>"; };
 		47165458163B0E14006FA8E6 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		47165459163B0E14006FA8E6 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -67,12 +83,17 @@
 		4742B3521695E41300E076AB /* Recipe.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Recipe.m; sourceTree = "<group>"; };
 		4742B3541695E42100E076AB /* Ingredient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Ingredient.h; sourceTree = "<group>"; };
 		4742B3551695E42100E076AB /* Ingredient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Ingredient.m; sourceTree = "<group>"; };
+		474853AB16974F3A00EA7360 /* GHMarkdownParser.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = GHMarkdownParser.xcodeproj; path = GHMarkdownParser/GHMarkdownParser/GHMarkdownParser.xcodeproj; sourceTree = "<group>"; };
+		474853B71697503700EA7360 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
+		474853B916976A5600EA7360 /* RecipeController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RecipeController.h; sourceTree = "<group>"; };
+		474853BA16976A5600EA7360 /* RecipeController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RecipeController.m; sourceTree = "<group>"; };
 		4794102E1694C1DC00333176 /* RecipeListController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RecipeListController.h; sourceTree = "<group>"; };
 		4794102F1694C1DC00333176 /* RecipeListController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RecipeListController.m; sourceTree = "<group>"; };
 		479410311694C2F700333176 /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
 		479410371694C72300333176 /* DropboxSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = DropboxSDK.framework; sourceTree = "<group>"; };
 		479410391694C7E500333176 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		4794103B1694C7EF00333176 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		47DD9D8C16972D4F00499581 /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -80,6 +101,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				474853B616974F4F00EA7360 /* libGHMarkdownParser.a in Frameworks */,
 				4742B3501695E3D000E076AB /* CoreData.framework in Frameworks */,
 				4794103C1694C7EF00333176 /* QuartzCore.framework in Frameworks */,
 				4794103A1694C7E500333176 /* Security.framework in Frameworks */,
@@ -106,6 +128,7 @@
 		4716543A163B0E14006FA8E6 = {
 			isa = PBXGroup;
 			children = (
+				474853B71697503700EA7360 /* Default-568h@2x.png */,
 				4742B34F1695E3D000E076AB /* CoreData.framework */,
 				4794103B1694C7EF00333176 /* QuartzCore.framework */,
 				479410391694C7E500333176 /* Security.framework */,
@@ -113,6 +136,7 @@
 				4716546D163B0E14006FA8E6 /* CookboxTests */,
 				47165448163B0E14006FA8E6 /* Frameworks */,
 				47165446163B0E14006FA8E6 /* Products */,
+				474853AB16974F3A00EA7360 /* GHMarkdownParser.xcodeproj */,
 			);
 			sourceTree = "<group>";
 		};
@@ -154,6 +178,8 @@
 				4742B3521695E41300E076AB /* Recipe.m */,
 				4742B34C1695E33700E076AB /* RecipeSource.h */,
 				4742B34D1695E33700E076AB /* RecipeSource.m */,
+				474853B916976A5600EA7360 /* RecipeController.h */,
+				474853BA16976A5600EA7360 /* RecipeController.m */,
 			);
 			path = Cookbox;
 			sourceTree = "<group>";
@@ -161,9 +187,9 @@
 		47165450163B0E14006FA8E6 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				47DD9D8C16972D4F00499581 /* main.m */,
 				47165451163B0E14006FA8E6 /* Cookbox-Info.plist */,
 				47165452163B0E14006FA8E6 /* InfoPlist.strings */,
-				47165455163B0E14006FA8E6 /* main.m */,
 				47165457163B0E14006FA8E6 /* Cookbox-Prefix.pch */,
 			);
 			name = "Supporting Files";
@@ -188,6 +214,14 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		474853AC16974F3A00EA7360 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				474853B316974F3A00EA7360 /* libGHMarkdownParser.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -202,6 +236,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				474853B516974F4500EA7360 /* PBXTargetDependency */,
 			);
 			name = Cookbox;
 			productName = Cookbox;
@@ -245,6 +280,12 @@
 			mainGroup = 4716543A163B0E14006FA8E6;
 			productRefGroup = 47165446163B0E14006FA8E6 /* Products */;
 			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = 474853AC16974F3A00EA7360 /* Products */;
+					ProjectRef = 474853AB16974F3A00EA7360 /* GHMarkdownParser.xcodeproj */;
+				},
+			);
 			projectRoot = "";
 			targets = (
 				47165444163B0E14006FA8E6 /* Cookbox */,
@@ -252,6 +293,16 @@
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		474853B316974F3A00EA7360 /* libGHMarkdownParser.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libGHMarkdownParser.a;
+			remoteRef = 474853B216974F3A00EA7360 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
 		47165443163B0E14006FA8E6 /* Resources */ = {
@@ -261,6 +312,7 @@
 				47165454163B0E14006FA8E6 /* InfoPlist.strings in Resources */,
 				4716545D163B0E14006FA8E6 /* MainStoryboard.storyboard in Resources */,
 				479410321694C2F700333176 /* Settings.bundle in Resources */,
+				474853B81697503700EA7360 /* Default-568h@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -295,13 +347,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				47165456163B0E14006FA8E6 /* main.m in Sources */,
 				4716545A163B0E14006FA8E6 /* AppDelegate.m in Sources */,
 				479410301694C1DC00333176 /* RecipeListController.m in Sources */,
 				4742B3461695DB7700E076AB /* Model.xcdatamodeld in Sources */,
 				4742B34E1695E33700E076AB /* RecipeSource.m in Sources */,
 				4742B3531695E41300E076AB /* Recipe.m in Sources */,
 				4742B3561695E42100E076AB /* Ingredient.m in Sources */,
+				47DD9D8D16972D4F00499581 /* main.m in Sources */,
+				474853BB16976A5600EA7360 /* RecipeController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -320,6 +373,11 @@
 			isa = PBXTargetDependency;
 			target = 47165444163B0E14006FA8E6 /* Cookbox */;
 			targetProxy = 4716546B163B0E14006FA8E6 /* PBXContainerItemProxy */;
+		};
+		474853B516974F4500EA7360 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = GHMarkdownParser;
+			targetProxy = 474853B416974F4500EA7360 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -354,7 +412,7 @@
 		47165476163B0E14006FA8E6 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = NO;
+				ALWAYS_SEARCH_USER_PATHS = YES;
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				CLANG_ENABLE_OBJC_ARC = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -371,15 +429,22 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = ../GHMarkdownParser;
 				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
+				LIBRARY_SEARCH_PATHS = ../GHMarkdownParser;
+				OTHER_LDFLAGS = (
+					"-all_load",
+					"-Objc",
+				);
 				SDKROOT = iphoneos;
+				USER_HEADER_SEARCH_PATHS = /usr/local/include;
 			};
 			name = Debug;
 		};
 		47165477163B0E14006FA8E6 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = NO;
+				ALWAYS_SEARCH_USER_PATHS = YES;
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				CLANG_ENABLE_OBJC_ARC = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -389,9 +454,16 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = ../GHMarkdownParser;
 				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
+				LIBRARY_SEARCH_PATHS = ../GHMarkdownParser;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
+				OTHER_LDFLAGS = (
+					"-all_load",
+					"-Objc",
+				);
 				SDKROOT = iphoneos;
+				USER_HEADER_SEARCH_PATHS = /usr/local/include;
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
@@ -402,10 +474,17 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)\"",
+					"\"$(SYSTEM_APPS_DIR)/Xcode.app/Contents/Developer/Library/Frameworks\"",
+					/usr/local/include,
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Cookbox/Cookbox-Prefix.pch";
+				HEADER_SEARCH_PATHS = GHMarkdownParser;
 				INFOPLIST_FILE = "Cookbox/Cookbox-Info.plist";
+				LIBRARY_SEARCH_PATHS = (
+					/usr/local/include,
+					GHMarkdownParser,
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -417,10 +496,17 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)\"",
+					"\"$(SYSTEM_APPS_DIR)/Xcode.app/Contents/Developer/Library/Frameworks\"",
+					/usr/local/include,
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Cookbox/Cookbox-Prefix.pch";
+				HEADER_SEARCH_PATHS = GHMarkdownParser;
 				INFOPLIST_FILE = "Cookbox/Cookbox-Info.plist";
+				LIBRARY_SEARCH_PATHS = (
+					/usr/local/include,
+					GHMarkdownParser,
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};

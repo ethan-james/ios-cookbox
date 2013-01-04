@@ -1,9 +1,9 @@
 //
 //  main.m
-//  Cookbox
+//  Rep!
 //
-//  Created by  on 10/26/12.
-//  Copyright (c) 2012 __MyCompanyName__. All rights reserved.
+//  Created by Ethan James on 11/26/12.
+//  Copyright (c) 2012 Ethan James. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>

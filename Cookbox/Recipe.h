@@ -31,6 +31,7 @@
 - (void)removeIngredients:(NSSet *)values;
 - (void)update:(NSString *)markdown;
 - (NSError *)save;
+- (NSString *)asHTML;
 
 + (Recipe *)findOrCreate:(NSString *)identifier bySource:(NSString *)source;
 + (NSArray *)getList;
