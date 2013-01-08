@@ -31,6 +31,10 @@
 		479410381694C72300333176 /* DropboxSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 479410371694C72300333176 /* DropboxSDK.framework */; };
 		4794103A1694C7E500333176 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 479410391694C7E500333176 /* Security.framework */; };
 		4794103C1694C7EF00333176 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4794103B1694C7EF00333176 /* QuartzCore.framework */; };
+		47D77B7C169B1FD400A4AEF8 /* jquery-1.8.3.min.js in Resources */ = {isa = PBXBuildFile; fileRef = 47D77B7A169B1F9600A4AEF8 /* jquery-1.8.3.min.js */; };
+		47D77B81169B23FB00A4AEF8 /* scraper.html in Resources */ = {isa = PBXBuildFile; fileRef = 47D77B80169B23FB00A4AEF8 /* scraper.html */; };
+		47D77B85169B382500A4AEF8 /* recipes in Resources */ = {isa = PBXBuildFile; fileRef = 47D77B84169B382500A4AEF8 /* recipes */; };
+		47D77B87169B402800A4AEF8 /* scrapers in Resources */ = {isa = PBXBuildFile; fileRef = 47D77B86169B402800A4AEF8 /* scrapers */; };
 		47DD9D8D16972D4F00499581 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 47DD9D8C16972D4F00499581 /* main.m */; };
 /* End PBXBuildFile section */
 
@@ -93,6 +97,10 @@
 		479410371694C72300333176 /* DropboxSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = DropboxSDK.framework; sourceTree = "<group>"; };
 		479410391694C7E500333176 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		4794103B1694C7EF00333176 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		47D77B7A169B1F9600A4AEF8 /* jquery-1.8.3.min.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = "jquery-1.8.3.min.js"; sourceTree = "<group>"; };
+		47D77B80169B23FB00A4AEF8 /* scraper.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = scraper.html; sourceTree = "<group>"; };
+		47D77B84169B382500A4AEF8 /* recipes */ = {isa = PBXFileReference; lastKnownFileType = folder; path = recipes; sourceTree = "<group>"; };
+		47D77B86169B402800A4AEF8 /* scrapers */ = {isa = PBXFileReference; lastKnownFileType = folder; path = scrapers; sourceTree = "<group>"; };
 		47DD9D8C16972D4F00499581 /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -187,6 +195,10 @@
 		47165450163B0E14006FA8E6 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				47D77B86169B402800A4AEF8 /* scrapers */,
+				47D77B84169B382500A4AEF8 /* recipes */,
+				47D77B80169B23FB00A4AEF8 /* scraper.html */,
+				47D77B7A169B1F9600A4AEF8 /* jquery-1.8.3.min.js */,
 				47DD9D8C16972D4F00499581 /* main.m */,
 				47165451163B0E14006FA8E6 /* Cookbox-Info.plist */,
 				47165452163B0E14006FA8E6 /* InfoPlist.strings */,
@@ -309,10 +321,14 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				47D77B7C169B1FD400A4AEF8 /* jquery-1.8.3.min.js in Resources */,
 				47165454163B0E14006FA8E6 /* InfoPlist.strings in Resources */,
 				4716545D163B0E14006FA8E6 /* MainStoryboard.storyboard in Resources */,
 				479410321694C2F700333176 /* Settings.bundle in Resources */,
 				474853B81697503700EA7360 /* Default-568h@2x.png in Resources */,
+				47D77B81169B23FB00A4AEF8 /* scraper.html in Resources */,
+				47D77B85169B382500A4AEF8 /* recipes in Resources */,
+				47D77B87169B402800A4AEF8 /* scrapers in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

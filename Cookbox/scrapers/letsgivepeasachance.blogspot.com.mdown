@@ -1,0 +1,15 @@
+# <%= $('[itemprop=name]') %> #
+
+**Ingredients**  
+
+<%= "* " + $('[itemprop=ingredients]') %>
+
+**Directions**  
+
+<%= "1. " + $('.directions ol > li > span') %>
+
+**Prep time:** <%= $("#liPrep span") %>  
+**Cook time:** <%= $('#liCook span') %>  
+[<%= url %>](<%= url %>)
+
+**Comments:** <%= $('[itemprop=description]') %>

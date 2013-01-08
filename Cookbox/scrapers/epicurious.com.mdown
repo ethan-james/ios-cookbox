@@ -1,0 +1,13 @@
+# <%= $('#titleInfo .title') %> #
+
+**Ingredients**  
+
+<%= "* " + $('#ingDiv') %>
+
+**Directions**  
+
+<%= "1. " + $('#prepDiv') %>
+
+[<%= url %>](<%= url %>)
+
+**Comments:** <%= $('#recipeIntro') %>

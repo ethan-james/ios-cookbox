@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script type="text/javascript" src="jquery-1.8.3.min.js"></script>
+    <script type="text/javascript">
+      function scrape() {
+        var html = $('#html').val(),
+            scraper = $('#scraper').val(),
+            regex = new RegExp("<%(.*?)%>"),
+            attributes = {url: window.location},
+            result;
+
+          while ((result = regex.exec(scraper)) != null) {
+            var match = result[1],
+                replace = result[0],
+                selector_pattern = /^\$\(['"](.*)?["']\)$/,
+                quote_pattern = /^['"](.*)?["']$/;
+
+            if (match.charAt(0) == "=") {
+                var match_parts = $.map(match.substring(1).split("+"), function(e, i) {
+                        return e.trim();
+                    }),
+                    selector_index = -1,
+                    replacements = [],
+                    selector;
+
+                for (var i = 0; i < match_parts.length; i++) {
+                    if (match_parts[i].match(selector_pattern)) {
+                        selector = match_parts[i].replace(selector_pattern, "$1");
+                        selector_index = i;
+                    } else if (match_parts[i].match(quote_pattern)) {
+                        match_parts[i] = match_parts[i].replace(quote_pattern, "$1");
+                    } else if (attributes[match_parts[i]]) {
+                        match_parts[i] = attributes[match_parts[i]];
+                    }
+                }
+                
+                if (selector) {
+                    $(selector, html).each(function() {
+                        $.each(this.innerHTML.split(/<br ?\/?>/), function() {
+                            var replaced = $("<div>" + this + "</div>").text(),
+                                replacement = match_parts.slice(0).splice(selector_index, 1, replaced);
+                            replacements.push(replacement.join());
+                        });
+                    });
+                } else replacements.push(match_parts.join());
+            }
+
+            scraper.replace(replace, replacements.join("\n"));
+        }
+          alert(scraper);
+        return scraper;
+      }
+    </script>
+    <style type="text/css">textarea { display: none; }</style>
+  </head>
+  <body>
+      <textarea id="html"><%= $html %></textarea>
+      <textarea id="scraper"><%= $scraper %></textarea>
+  </body>
+</html>

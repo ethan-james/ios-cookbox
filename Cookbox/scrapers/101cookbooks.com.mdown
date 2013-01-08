@@ -1,0 +1,16 @@
+# <%= $('#recipe h1') %> #
+
+**Ingredients**  
+
+<%= "* " + $('#recipe blockquote p') %>
+
+**Directions**  
+
+<%= "1. " + $('#recipe > p:not(.recipeend, .recipetimes, :has(i), :has(em), :contains(Serves))') %>
+
+**Prep time:** <%= $("#recipe .recipetimes .preptime") %>  
+**Cook time:** <%= $('#recipe .recipetimes .cooktime') %>  
+**Quantity:** <%= $('#recipe > p > i:contains(Serves)') %>  
+[<%= url %>](<%= url %>)
+
+**Comments:** <%= $('#recipe > h1 + p > i') %>

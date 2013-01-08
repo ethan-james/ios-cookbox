@@ -8,6 +8,7 @@
 
 #import "AppDelegate.h"
 #import "RecipeListController.h"
+#import "RecipeController.h"
 #import <DropboxSDK/DropboxSDK.h>
 #import <CoreData/CoreData.h>
 
@@ -64,11 +65,12 @@
             [c syncRecipes];
         }
         return YES;
-    }
-    if ([[url scheme] isEqualToString:@"cookbox"]) {
-        NSError *error;
-        NSURL *rurl = [[NSURL alloc] initWithScheme:@"http" host:[url host] path:[url path]];
-        NSString *html = [NSString stringWithContentsOfURL:rurl encoding:NSStringEncodingConversionAllowLossy error:&error];
+    } else if ([[url scheme] isEqualToString:@"cookbox"]) {
+        UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"MainStoryboard" bundle:nil];
+        RecipeController *rc = [storyboard instantiateViewControllerWithIdentifier:@"RecipeController"];
+
+        [rc setRecipeURL:[[NSURL alloc] initWithScheme:@"http" host:[url host] path:[url path]]];
+        [nav presentViewController:rc animated:YES completion:^{}];
     }
     return NO;
 }

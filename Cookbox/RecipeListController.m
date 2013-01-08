@@ -104,13 +104,14 @@ NSInteger totalFiles = 0;
     }
 }
 
--(void)restClient:(DBRestClient *)client loadedDeltaEntries:(NSArray *)entries reset:(BOOL)shouldReset cursor:(NSString *)cursor hasMore:(BOOL)hasMore{
+-(void)restClient:(DBRestClient *)client loadedDeltaEntries:(NSArray *)entries reset:(BOOL)shouldReset cursor:(NSString *)cursor hasMore:(BOOL)hasMore {
     fileCount = totalFiles = [entries count];
     [self setTitle:[NSString stringWithFormat:@"Syncing recipes (0 / %d)", totalFiles]];
 
     for (DBDeltaEntry *file in entries) {
-        NSString *path = [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:file.lowercasePath];
-        if(!file.metadata.isDirectory){
+        NSString *shortPath = [@"recipes" stringByAppendingPathComponent:file.lowercasePath];
+        NSString *path = [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:shortPath];
+        if(!file.metadata.isDirectory) {
             [dropboxDictionary setObject:file forKey:path];
             [[self restClient] loadFile:file.lowercasePath intoPath:path];
         }
