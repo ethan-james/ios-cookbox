@@ -7,6 +7,7 @@
 //
 
 #import "RecipeController.h"
+#import "RecipeSource.h"
 
 @interface RecipeController ()
 
@@ -44,7 +45,11 @@
 - (void)viewDidLoad
 {
     NSError *error;
+    UIBarButtonItem *saveButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemSave target:self action:@selector(saveRecipe)];
+
     [super viewDidLoad];
+    
+    self.navigationItem.rightBarButtonItem = saveButton;
     
     if ([self recipe] != nil) {
         [webView loadHTMLString:[[self recipe] asHTML] baseURL:[NSURL URLWithString:@"/"]];
@@ -60,6 +65,7 @@
 
             content = [content stringByReplacingOccurrencesOfString:@"<%= $scraper %>" withString:scraper];
             content = [content stringByReplacingOccurrencesOfString:@"<%= $html %>" withString:html];
+            content = [content stringByReplacingOccurrencesOfString:@"<%= $scraper_url %>" withString:[[self recipeURL] absoluteString]];
 
             [[self webView] loadHTMLString:content baseURL:[NSURL fileURLWithPath:contentPath]];
         } else {
@@ -74,11 +80,27 @@
     // Dispose of any resources that can be recreated.
 }
 
+#pragma mark nav buttons
+
+- (void)saveRecipe {
+    [[self recipe] save];
+}
+
 #pragma mark UIWebView delegate
 
 - (void)webViewDidFinishLoad:(UIWebView *)wv {
-    NSLog(@"hmm?");
-    NSLog(@"%@", [[self webView] stringByEvaluatingJavaScriptFromString:@"scrape()"]);
+    if ([self recipe] == nil) {
+        NSString *markdown = [[self webView] stringByEvaluatingJavaScriptFromString:@"scrape()"];
+        Recipe *recipe = [Recipe new];
+        RecipeSource *recipeSource = [RecipeSource new:[[self recipeURL] absoluteString] fromSource:@"web"];
+    
+        [recipe update:markdown];
+        [recipeSource setRecipe:recipe];
+        
+        [self setRecipe:recipe];
+
+        [webView loadHTMLString:[recipe asHTML] baseURL:[NSURL URLWithString:@"/"]];
+    }
 }
 
 #pragma mark UIAlertView delegate

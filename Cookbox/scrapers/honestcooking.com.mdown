@@ -1,0 +1,15 @@
+# <%= $('.easyrecipe .ERName .fn') %> #
+
+**Ingredients**  
+
+<%= "* " + $('.easyrecipe .ingredients .ingredient') %>
+
+**Directions**  
+
+<%= "1. " + $('.easyrecipe .instructions .instruction') %>
+
+**Prep time:** <%= $(".easyrecipe .preptime") %>  
+**Cook time:** <%= $('.easyrecipe .cooktime') %>  
+[<%= url %>](<%= url %>)
+
+**Comments:** <%= $('.easyrecipe .summary') %>

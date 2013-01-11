@@ -23,6 +23,24 @@
 @dynamic markdown;
 @dynamic ingredients;
 
+@synthesize restClient;
+
+#pragma mark Dropbox
+
+- (DBRestClient *)restClient {
+    if (!restClient) {
+        restClient = [[DBRestClient alloc] initWithSession:[DBSession sharedSession]];
+        restClient.delegate = self;
+    }
+    return restClient;
+}
+
+- (void)restClient:(DBRestClient *)client uploadedFile:(NSString *)dest from:(NSString *)src {
+    
+}
+
+#pragma mark core data
+
 NSManagedObjectContext *_managedObjectContext;
 
 + (NSManagedObjectContext *)managedObjectContext
@@ -36,6 +54,12 @@ NSManagedObjectContext *_managedObjectContext;
 }
 
 #pragma mark static fetch helpers
+
++ (Recipe *)new {
+    NSManagedObjectContext *moc = [self managedObjectContext];
+    NSEntityDescription *r = [NSEntityDescription entityForName:@"Recipe" inManagedObjectContext:moc];
+    return [[Recipe alloc] initWithEntity:r insertIntoManagedObjectContext:moc];
+}
 
 + (Recipe *)findOrCreate:(NSString *)identifier bySource:(NSString *)source {
     NSManagedObjectContext *moc = [self managedObjectContext];
@@ -95,11 +119,35 @@ NSManagedObjectContext *_managedObjectContext;
 - (NSError *)save {
     NSError *error;
     [[self managedObjectContext] save:&error];
+
+    if ([[DBSession sharedSession] isLinked]) {
+        NSData *data = [[self markdown] dataUsingEncoding:NSStringEncodingConversionExternalRepresentation];
+        NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+        NSString *filename = [[self slug] stringByAppendingPathExtension:@"mdown"];
+        NSString *dir = [[paths objectAtIndex:0] stringByAppendingPathComponent:@"recipes"];
+        NSString *path = [dir stringByAppendingPathComponent:filename];
+        
+        if (![[NSFileManager defaultManager] fileExistsAtPath:dir]) {
+            [[NSFileManager defaultManager] createDirectoryAtPath:dir withIntermediateDirectories:NO attributes:nil error:&error];
+        }
+
+        [[NSFileManager defaultManager] createFileAtPath:path contents:data attributes:nil];
+        [[self restClient] uploadFile:filename toPath:@"/recipes" fromPath:path];
+    }
+    
     return error;
 }
 
 - (NSString *)asHTML {
     return [GHMarkdownParser flavoredHTMLStringFromMarkdownString:[self markdown]];
+}
+
+- (NSString *)slug {
+    NSError *error;
+    NSRange r = NSMakeRange(0, self.name.length);
+    NSRegularExpression *regex = [NSRegularExpression regularExpressionWithPattern:@"[^a-z0-9]+" options:0 error:&error];
+    
+    return [regex stringByReplacingMatchesInString:[self.name lowercaseString] options:0 range:r withTemplate:@"-"];
 }
 
 @end

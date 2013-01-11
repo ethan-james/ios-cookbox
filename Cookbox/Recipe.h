@@ -8,9 +8,9 @@
 
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
+#import <DropboxSDK/DropboxSDK.h>
 
-
-@interface Recipe : NSManagedObject
+@interface Recipe : NSManagedObject <DBRestClientDelegate>
 
 @property (nonatomic, retain) NSString * name;
 @property (nonatomic, retain) NSString * prep_time;
@@ -21,6 +21,8 @@
 @property (nonatomic, retain) NSString * comments;
 @property (nonatomic, retain) NSString * markdown;
 @property (nonatomic, retain) NSSet *ingredients;
+@property (nonatomic, retain) DBRestClient *restClient;
+
 @end
 
 @interface Recipe (CoreDataGeneratedAccessors)
@@ -33,6 +35,7 @@
 - (NSError *)save;
 - (NSString *)asHTML;
 
++ (NSManagedObjectContext *)managedObjectContext;
 + (Recipe *)findOrCreate:(NSString *)identifier bySource:(NSString *)source;
 + (NSArray *)getList;
 

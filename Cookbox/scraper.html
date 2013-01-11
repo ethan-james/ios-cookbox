@@ -3,11 +3,38 @@
   <head>
     <script type="text/javascript" src="jquery-1.8.3.min.js"></script>
     <script type="text/javascript">
+      // splits a string on a separator, unless that separator appears in a quoted section
+      function literalSplit(str, sep) {
+            var a = [],
+                last = 0,
+                inSingle = false,
+                inDouble = false;
+
+            for (var i = 0; i < str.length; i++) {
+                switch (str.charAt(i)) {
+                    case "'":
+                        inSingle = !inSingle;
+                        break;
+                    case '"':
+                        inDouble = !inDouble;
+                        break;
+                    case sep:
+                        if (!inSingle && !inDouble) {
+                            a.push(str.substring(last, i));
+                            last = i + 1;
+                        }
+                }
+            }
+            a.push(str.substr(last));
+          
+            return a;
+      }
+      
       function scrape() {
         var html = $('#html').val(),
             scraper = $('#scraper').val(),
             regex = new RegExp("<%(.*?)%>"),
-            attributes = {url: window.location},
+            attributes = {url: $('#scraper').data('url')},
             result;
 
           while ((result = regex.exec(scraper)) != null) {
@@ -17,12 +44,10 @@
                 quote_pattern = /^['"](.*)?["']$/;
 
             if (match.charAt(0) == "=") {
-                var match_parts = $.map(match.substring(1).split("+"), function(e, i) {
-                        return e.trim();
-                    }),
+                var match_parts = $.map(literalSplit(match.substring(1), "+"), function(e, i) { return e.trim(); }),
                     selector_index = -1,
                     replacements = [],
-                    selector;
+                    selector = null;
 
                 for (var i = 0; i < match_parts.length; i++) {
                     if (match_parts[i].match(selector_pattern)) {
@@ -38,17 +63,19 @@
                 if (selector) {
                     $(selector, html).each(function() {
                         $.each(this.innerHTML.split(/<br ?\/?>/), function() {
-                            var replaced = $("<div>" + this + "</div>").text(),
-                                replacement = match_parts.slice(0).splice(selector_index, 1, replaced);
-                            replacements.push(replacement.join());
+                               var replaced = $("<div>" + this + "</div>").text(),
+                                   replacement = match_parts.slice(0);
+                               
+                               replacement.splice(selector_index, 1, replaced);
+                               replacements.push(replacement.join(''));
                         });
                     });
-                } else replacements.push(match_parts.join());
+                } else replacements.push(match_parts.join(''));
             }
 
-            scraper.replace(replace, replacements.join("\n"));
+            scraper = scraper.replace(replace, replacements.join("\n"));
         }
-          alert(scraper);
+
         return scraper;
       }
     </script>
@@ -56,6 +83,6 @@
   </head>
   <body>
       <textarea id="html"><%= $html %></textarea>
-      <textarea id="scraper"><%= $scraper %></textarea>
+      <textarea id="scraper" data-url="<%= $scraper_url %>"><%= $scraper %></textarea>
   </body>
 </html>

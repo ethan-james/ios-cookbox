@@ -105,31 +105,41 @@ NSInteger totalFiles = 0;
 }
 
 -(void)restClient:(DBRestClient *)client loadedDeltaEntries:(NSArray *)entries reset:(BOOL)shouldReset cursor:(NSString *)cursor hasMore:(BOOL)hasMore {
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *path = [[paths objectAtIndex:0] stringByAppendingPathComponent:@"recipes"];
+    NSError *error;
+    
+    if (![[NSFileManager defaultManager] fileExistsAtPath:path]) {
+        [[NSFileManager defaultManager] createDirectoryAtPath:path withIntermediateDirectories:NO attributes:nil error:&error];
+    }
+    
     fileCount = totalFiles = [entries count];
     [self setTitle:[NSString stringWithFormat:@"Syncing recipes (0 / %d)", totalFiles]];
-
+    
     for (DBDeltaEntry *file in entries) {
-        NSString *shortPath = [@"recipes" stringByAppendingPathComponent:file.lowercasePath];
-        NSString *path = [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:shortPath];
         if(!file.metadata.isDirectory) {
-            [dropboxDictionary setObject:file forKey:path];
-            [[self restClient] loadFile:file.lowercasePath intoPath:path];
+            NSString *filename = [[paths objectAtIndex:0] stringByAppendingPathComponent:file.lowercasePath];
+            [dropboxDictionary setObject:file forKey:filename];
+            [[self restClient] loadFile:file.lowercasePath intoPath:filename];
+        } else {
+            fileCount--;
+            totalFiles--;
         }
     }
 }
 
 -(void)restClient:(DBRestClient *)client loadedFile:(NSString *)destPath {
     NSError *error;
-    NSString *md = [NSString stringWithContentsOfFile:destPath encoding:NSStringEncodingConversionAllowLossy error:&error];
+    NSString *md = [NSString stringWithContentsOfFile:destPath encoding:NSStringEncodingConversionExternalRepresentation error:&error];
     DBDeltaEntry *file = [dropboxDictionary objectForKey:destPath];
     Recipe *r = [Recipe findOrCreate:file.lowercasePath bySource:@"dropbox"];
     
     [r update:md];
-    [r save];
 
     fileCount--;
     [self setTitle:[NSString stringWithFormat:@"Syncing recipes (%d / %d)", totalFiles - fileCount, totalFiles]];
     if (fileCount == 0) {
+        [[Recipe managedObjectContext] save:&error];
         [self reloadRecipes];
         [self.tableView reloadData];
     }

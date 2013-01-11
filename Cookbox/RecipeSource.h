@@ -17,4 +17,6 @@
 @property (nonatomic, retain) NSString * identifier;
 @property (nonatomic, retain) Recipe *recipe;
 
++ (RecipeSource *)new:(NSString *)identifier fromSource:(NSString *)source;
+
 @end

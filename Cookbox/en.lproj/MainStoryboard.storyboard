@@ -7,7 +7,7 @@
         <!--Recipe List Controller-->
         <scene sceneID="VqP-hv-AXa">
             <objects>
-                <tableViewController id="Xh4-TV-mZq" customClass="RecipeListController" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="RecipeListController" id="Xh4-TV-mZq" customClass="RecipeListController" sceneMemberID="viewController">
                     <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="0zl-Qy-bTq">
                         <rect key="frame" x="0.0" y="64" width="320" height="416"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -68,7 +68,7 @@
         <!--Navigation Controller-->
         <scene sceneID="Uan-1R-CYZ">
             <objects>
-                <navigationController id="NZe-u7-937" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="Navigation" id="NZe-u7-937" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="BMY-Fi-deH">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>

@@ -57,20 +57,21 @@
 #pragma mark dropbox
 
 - (BOOL)application:(UIApplication *)application handleOpenURL:(NSURL *)url {
-    UINavigationController *nav = (UINavigationController *)[[[UIApplication sharedApplication] keyWindow] rootViewController];
+    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"MainStoryboard" bundle:nil];
+    RecipeListController *recipeList = [storyboard instantiateViewControllerWithIdentifier:@"RecipeListController"];
 
     if ([[DBSession sharedSession] handleOpenURL:url]) {
         if ([[DBSession sharedSession] isLinked]) {
-            RecipeListController *c = (RecipeListController *)[nav presentedViewController];
-            [c syncRecipes];
+            [recipeList syncRecipes];
         }
         return YES;
     } else if ([[url scheme] isEqualToString:@"cookbox"]) {
-        UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"MainStoryboard" bundle:nil];
-        RecipeController *rc = [storyboard instantiateViewControllerWithIdentifier:@"RecipeController"];
+        UINavigationController *nav = (UINavigationController *)self.window.rootViewController;
+        RecipeListController *recipeList = [storyboard instantiateViewControllerWithIdentifier:@"RecipeListController"];
+        RecipeController *recipe = [storyboard instantiateViewControllerWithIdentifier:@"RecipeController"];
 
-        [rc setRecipeURL:[[NSURL alloc] initWithScheme:@"http" host:[url host] path:[url path]]];
-        [nav presentViewController:rc animated:YES completion:^{}];
+        [recipe setRecipeURL:[[NSURL alloc] initWithScheme:@"http" host:[url host] path:[url path]]];
+        [nav setViewControllers:[NSArray arrayWithObjects:recipeList, recipe, nil] animated:NO];
     }
     return NO;
 }
