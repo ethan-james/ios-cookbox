@@ -9,8 +9,9 @@
 #import <UIKit/UIKit.h>
 #import <DropboxSDK/DropboxSDK.h>
 
-@interface RecipeListController : UITableViewController <DBRestClientDelegate>
+@interface RecipeListController : UITableViewController <DBRestClientDelegate, UISearchBarDelegate, UISearchDisplayDelegate>
     @property (nonatomic, retain) NSArray *recipes;
+    @property (nonatomic, retain, readonly) IBOutlet UISearchBar *search;
 
     - (void)syncRecipes;
 @end

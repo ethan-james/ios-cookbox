@@ -18,6 +18,7 @@
 @implementation RecipeListController
 
 @synthesize recipes;
+@synthesize search;
 DBRestClient *restClient;
 NSMutableDictionary *dropboxDictionary;
 NSInteger fileCount = 0;
@@ -33,9 +34,9 @@ NSInteger totalFiles = 0;
 
 - (void)viewDidLoad
 {
-    [super viewDidLoad];
+    UIBarButtonItem *sync = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemRefresh target:self action:@selector(didPressSync)];
     
-    UIBarButtonItem *sync = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemRefresh target:self action:@selector(didPressLink)];
+    [super viewDidLoad];
  
     self.navigationItem.leftBarButtonItem = sync;
     dropboxDictionary = [[NSMutableDictionary alloc] init];
@@ -72,7 +73,7 @@ NSInteger totalFiles = 0;
     return restClient;
 }
 
-- (void)didPressLink {
+- (void)didPressSync {
     if ([[DBSession sharedSession] isLinked]) {
         [self syncRecipes];
     } else {
@@ -114,7 +115,12 @@ NSInteger totalFiles = 0;
     }
     
     fileCount = totalFiles = [entries count];
-    [self setTitle:[NSString stringWithFormat:@"Syncing recipes (0 / %d)", totalFiles]];
+    
+    if (totalFiles > 0) {
+        [self setTitle:[NSString stringWithFormat:@"Syncing recipes (0 / %d)", totalFiles]];
+    } else {
+        [self reloadRecipes];
+    }
     
     for (DBDeltaEntry *file in entries) {
         if(!file.metadata.isDirectory) {
@@ -126,6 +132,8 @@ NSInteger totalFiles = 0;
             totalFiles--;
         }
     }
+    
+    [[NSUserDefaults standardUserDefaults] setObject:cursor forKey:@"cursor"];
 }
 
 -(void)restClient:(DBRestClient *)client loadedFile:(NSString *)destPath {
@@ -211,6 +219,19 @@ NSInteger totalFiles = 0;
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [self performSegueWithIdentifier:@"OpenRecipe" sender:[self.tableView cellForRowAtIndexPath:indexPath]];
+}
+
+#pragma mark search delegate
+
+- (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar {
+    
+}
+
+- (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText {
+}
+
+- (void)searchBarCancelButtonClicked:(UISearchBar *)searchBar {
+    [searchBar resignFirstResponder];
 }
 
 @end

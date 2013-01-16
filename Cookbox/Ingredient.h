@@ -18,4 +18,7 @@
 @property (nonatomic, retain) Recipe *recipe;
 @property (nonatomic, retain) NSNumber * ordinal;
 
++ (NSManagedObjectContext *)managedObjectContext;
++ (Ingredient *)new:(NSString *)text forRecipe:(Recipe *)recipe;
+
 @end

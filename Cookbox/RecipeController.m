@@ -52,7 +52,7 @@
     self.navigationItem.rightBarButtonItem = saveButton;
     
     if ([self recipe] != nil) {
-        [webView loadHTMLString:[[self recipe] asHTML] baseURL:[NSURL URLWithString:@"/"]];
+        [webView loadHTMLString:[[self recipe] asHTML] baseURL:[NSURL fileURLWithPath:[[NSBundle mainBundle] bundlePath]]];
     } else if ([self recipeURL] != nil) {
         NSString *html = [NSString stringWithContentsOfURL:[self recipeURL] encoding:NSStringEncodingConversionAllowLossy error:&error];
         NSString *contentPath = [[[NSBundle mainBundle] bundlePath] stringByAppendingPathComponent:@"scraper.html"];
@@ -99,7 +99,7 @@
         
         [self setRecipe:recipe];
 
-        [webView loadHTMLString:[recipe asHTML] baseURL:[NSURL URLWithString:@"/"]];
+        [webView loadHTMLString:[recipe asHTML] baseURL:[NSURL fileURLWithPath:[[NSBundle mainBundle] bundlePath]]];
     }
 }
 

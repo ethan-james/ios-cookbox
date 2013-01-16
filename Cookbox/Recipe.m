@@ -7,6 +7,7 @@
 //
 
 #import "Recipe.h"
+#import "Ingredient.h"
 #import "AppDelegate.h"
 #import "RecipeSource.h"
 #import <GHMarkdownParser/GHMarkdownParser/GHMarkdownParser.h>
@@ -102,18 +103,39 @@ NSManagedObjectContext *_managedObjectContext;
     return [moc executeFetchRequest:request error:&error];
 }
 
++ (NSArray *)searchIngredients:(NSString *)s {
+    NSManagedObjectContext *moc = [self managedObjectContext];
+    NSFetchRequest *request = [[NSFetchRequest alloc] init];
+    NSEntityDescription *r = [NSEntityDescription entityForName:@"Recipe" inManagedObjectContext:moc];
+    NSArray *sort = [NSArray arrayWithObject:[NSSortDescriptor sortDescriptorWithKey:@"name" ascending:YES]];
+    NSError *error;
+    NSPredicate *searchPredicate = [NSPredicate predicateWithFormat:@""];
+
+}
+
 # pragma mark CRUD helpers
 
 - (void)update:(NSString *)markdown {
     NSError *error;
+    NSString *ingredients;
+    NSArray *ingredientMatches;
     NSRegularExpression *regex = [NSRegularExpression regularExpressionWithPattern:@"# (.+) #" options:NSRegularExpressionCaseInsensitive error:&error];
     NSRange range = NSMakeRange(0, [markdown length]);
     NSTextCheckingResult *match = [regex firstMatchInString:markdown options:NSMatchingWithoutAnchoringBounds range:range];
     NSRange nameRange = [match rangeAtIndex:1];
+    NSRegularExpression *ingredientsRegex = [NSRegularExpression regularExpressionWithPattern:@"^\\* (.+)$" options:NSRegularExpressionAnchorsMatchLines error:&error];
     NSString *name = [markdown substringWithRange:nameRange];
     
     [self setName:name];
     [self setMarkdown:markdown];
+    [self clearIngredients];
+    
+    ingredients = [self ingredientsBlock];
+    ingredientMatches = [ingredientsRegex matchesInString:ingredients options:NSRegularExpressionUseUnixLineSeparators range:NSMakeRange(0, [ingredients length])];
+    
+    for (NSTextCheckingResult *line in ingredientMatches) {
+        [self addIngredientsObject:[Ingredient new:[ingredients substringWithRange:[line rangeAtIndex:1]] forRecipe:self]];
+    }
 }
 
 - (NSError *)save {
@@ -138,9 +160,13 @@ NSManagedObjectContext *_managedObjectContext;
     return error;
 }
 
-- (NSString *)asHTML {
-    return [GHMarkdownParser flavoredHTMLStringFromMarkdownString:[self markdown]];
+- (void)clearIngredients {
+    for (NSManagedObject *ingredient in [self ingredients]) {
+        [[self managedObjectContext] deleteObject:ingredient];
+    }
 }
+
+#pragma mark formatting helpers
 
 - (NSString *)slug {
     NSError *error;
@@ -148,6 +174,23 @@ NSManagedObjectContext *_managedObjectContext;
     NSRegularExpression *regex = [NSRegularExpression regularExpressionWithPattern:@"[^a-z0-9]+" options:0 error:&error];
     
     return [regex stringByReplacingMatchesInString:[self.name lowercaseString] options:0 range:r withTemplate:@"-"];
+}
+
+- (NSString *)asHTML {
+    return [GHMarkdownParser flavoredHTMLStringFromMarkdownString:[self markdown]];
+}
+
+- (NSString *)ingredientsBlock {
+    NSError *error;
+    NSString *markdown = [self markdown];
+    NSRange range = NSMakeRange(0, [markdown length]);
+    NSRegularExpression *ingredientsHeaderRegex = [NSRegularExpression regularExpressionWithPattern:@"\\*\\*Ingredients\\*\\*\\s+" options:NSRegularExpressionUseUnixLineSeparators error:&error];
+    NSRange ingredientsHeader = [ingredientsHeaderRegex rangeOfFirstMatchInString:markdown options:NSRegularExpressionUseUnixLineSeparators range:range];
+    NSRange ingredientsBlock = NSMakeRange(ingredientsHeader.location + ingredientsHeader.length, [markdown length] - ingredientsHeader.location - ingredientsHeader.length);
+    NSRange ingredientsEnd = [markdown rangeOfString:@"\n\n" options:NSLiteralSearch range:ingredientsBlock];
+
+    ingredientsBlock.length = ingredientsEnd.location - ingredientsBlock.location;
+    return [markdown substringWithRange:ingredientsBlock];
 }
 
 @end

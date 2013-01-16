@@ -26,6 +26,7 @@
 		474853B616974F4F00EA7360 /* libGHMarkdownParser.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 474853B316974F3A00EA7360 /* libGHMarkdownParser.a */; };
 		474853B81697503700EA7360 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 474853B71697503700EA7360 /* Default-568h@2x.png */; };
 		474853BB16976A5600EA7360 /* RecipeController.m in Sources */ = {isa = PBXBuildFile; fileRef = 474853BA16976A5600EA7360 /* RecipeController.m */; };
+		4749431316A6071400BA5E86 /* recipe.css in Resources */ = {isa = PBXBuildFile; fileRef = 4749431216A6071400BA5E86 /* recipe.css */; };
 		479410301694C1DC00333176 /* RecipeListController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4794102F1694C1DC00333176 /* RecipeListController.m */; };
 		479410321694C2F700333176 /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 479410311694C2F700333176 /* Settings.bundle */; };
 		479410381694C72300333176 /* DropboxSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 479410371694C72300333176 /* DropboxSDK.framework */; };
@@ -91,6 +92,7 @@
 		474853B71697503700EA7360 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		474853B916976A5600EA7360 /* RecipeController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RecipeController.h; sourceTree = "<group>"; };
 		474853BA16976A5600EA7360 /* RecipeController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RecipeController.m; sourceTree = "<group>"; };
+		4749431216A6071400BA5E86 /* recipe.css */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.css; path = recipe.css; sourceTree = "<group>"; };
 		4794102E1694C1DC00333176 /* RecipeListController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RecipeListController.h; sourceTree = "<group>"; };
 		4794102F1694C1DC00333176 /* RecipeListController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RecipeListController.m; sourceTree = "<group>"; };
 		479410311694C2F700333176 /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
@@ -203,6 +205,7 @@
 				47165451163B0E14006FA8E6 /* Cookbox-Info.plist */,
 				47165452163B0E14006FA8E6 /* InfoPlist.strings */,
 				47165457163B0E14006FA8E6 /* Cookbox-Prefix.pch */,
+				4749431216A6071400BA5E86 /* recipe.css */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -329,6 +332,7 @@
 				47D77B81169B23FB00A4AEF8 /* scraper.html in Resources */,
 				47D77B85169B382500A4AEF8 /* recipes in Resources */,
 				47D77B87169B402800A4AEF8 /* scrapers in Resources */,
+				4749431316A6071400BA5E86 /* recipe.css in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

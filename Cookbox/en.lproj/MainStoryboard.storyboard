@@ -12,9 +12,17 @@
                         <rect key="frame" x="0.0" y="64" width="320" height="416"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <searchBar key="tableHeaderView" contentMode="redraw" barStyle="blackTranslucent" placeholder="Search by ingredient" showsCancelButton="YES" id="YbF-cl-VTP">
+                            <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                            <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                            <textInputTraits key="textInputTraits" autocorrectionType="yes"/>
+                            <connections>
+                                <outlet property="delegate" destination="Xh4-TV-mZq" id="bjd-TJ-lby"/>
+                            </connections>
+                        </searchBar>
                         <prototypes>
                             <tableViewCell contentMode="scaleToFill" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="Cell" id="iZI-5P-fpR">
-                                <rect key="frame" x="0.0" y="22" width="320" height="44"/>
+                                <rect key="frame" x="0.0" y="66" width="320" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                     <rect key="frame" x="0.0" y="0.0" width="300" height="43"/>
@@ -30,12 +38,13 @@
                     </tableView>
                     <navigationItem key="navigationItem" id="Jow-cR-9C9"/>
                     <connections>
+                        <outlet property="search" destination="YbF-cl-VTP" id="hvz-x7-479"/>
                         <segue destination="94O-uh-Wce" kind="push" identifier="OpenRecipe" id="f2t-cI-WvL"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4IR-67-EsA" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="119" y="-64"/>
+            <point key="canvasLocation" x="147" y="-372"/>
         </scene>
         <!--Recipe Controller-->
         <scene sceneID="aO4-yF-FNu">
@@ -63,7 +72,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="VU1-GG-jGp" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="618" y="-64"/>
+            <point key="canvasLocation" x="646" y="-372"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="Uan-1R-CYZ">
@@ -81,20 +90,9 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7dQ-cp-RtX" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-433" y="-64"/>
+            <point key="canvasLocation" x="-405" y="-372"/>
         </scene>
     </scenes>
-    <classes>
-        <class className="RecipeController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/RecipeController.h"/>
-            <relationships>
-                <relationship kind="outlet" name="webView" candidateClass="UIWebView"/>
-            </relationships>
-        </class>
-        <class className="RecipeListController" superclassName="UITableViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/RecipeListController.h"/>
-        </class>
-    </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>
