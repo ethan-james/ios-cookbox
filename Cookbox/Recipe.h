@@ -38,5 +38,6 @@
 + (NSManagedObjectContext *)managedObjectContext;
 + (Recipe *)findOrCreate:(NSString *)identifier bySource:(NSString *)source;
 + (NSArray *)getList;
++ (NSArray *)searchIngredients:(NSString *)s;
 
 @end

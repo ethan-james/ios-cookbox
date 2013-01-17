@@ -26,6 +26,10 @@
 
 @synthesize restClient;
 
+- (AppDelegate *)appDelegate {
+    return [[UIApplication sharedApplication] delegate];
+}
+
 #pragma mark Dropbox
 
 - (DBRestClient *)restClient {
@@ -37,7 +41,17 @@
 }
 
 - (void)restClient:(DBRestClient *)client uploadedFile:(NSString *)dest from:(NSString *)src {
-    
+    NSLog(@"%@ uploaded to dropbox", dest);
+}
+
+- (void)restClient:(DBRestClient *)client loadedMetadata:(DBMetadata *)metadata {
+    [[self restClient] uploadFile:metadata.filename toPath:@"/recipes"  withParentRev:metadata.rev fromPath:[self localPath]];
+}
+
+- (void)restClient:(DBRestClient *)client loadMetadataFailedWithError:(NSError *)error {
+    if (error.code == 404) {
+        [[self restClient] uploadFile:[self filename] toPath:@"/recipes"  withParentRev:nil fromPath:[self localPath]];
+    }
 }
 
 #pragma mark core data
@@ -106,11 +120,22 @@ NSManagedObjectContext *_managedObjectContext;
 + (NSArray *)searchIngredients:(NSString *)s {
     NSManagedObjectContext *moc = [self managedObjectContext];
     NSFetchRequest *request = [[NSFetchRequest alloc] init];
-    NSEntityDescription *r = [NSEntityDescription entityForName:@"Recipe" inManagedObjectContext:moc];
+    NSEntityDescription *i = [NSEntityDescription entityForName:@"Ingredient" inManagedObjectContext:moc];
     NSArray *sort = [NSArray arrayWithObject:[NSSortDescriptor sortDescriptorWithKey:@"name" ascending:YES]];
+    NSPredicate *searchPredicate = [NSPredicate predicateWithFormat:@"text CONTAINS %@", s];
     NSError *error;
-    NSPredicate *searchPredicate = [NSPredicate predicateWithFormat:@""];
+    NSArray *ingredients;
+    NSMutableSet *recipes = [[NSMutableSet alloc] init];
 
+    [request setEntity:i];
+    [request setPredicate:searchPredicate];
+    
+    ingredients = [moc executeFetchRequest:request error:&error];
+    for (Ingredient *ingredient in ingredients) {
+        [recipes addObject:ingredient.recipe];
+    }
+
+    return [recipes sortedArrayUsingDescriptors:sort];
 }
 
 # pragma mark CRUD helpers
@@ -144,17 +169,15 @@ NSManagedObjectContext *_managedObjectContext;
 
     if ([[DBSession sharedSession] isLinked]) {
         NSData *data = [[self markdown] dataUsingEncoding:NSStringEncodingConversionExternalRepresentation];
-        NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-        NSString *filename = [[self slug] stringByAppendingPathExtension:@"mdown"];
-        NSString *dir = [[paths objectAtIndex:0] stringByAppendingPathComponent:@"recipes"];
-        NSString *path = [dir stringByAppendingPathComponent:filename];
+        NSFileManager *fileManager = [NSFileManager defaultManager];
+        NSString *recipeDirectory = [[self appDelegate] recipeDirectory];
         
-        if (![[NSFileManager defaultManager] fileExistsAtPath:dir]) {
-            [[NSFileManager defaultManager] createDirectoryAtPath:dir withIntermediateDirectories:NO attributes:nil error:&error];
+        if (![fileManager fileExistsAtPath:recipeDirectory]) {
+            [fileManager createDirectoryAtPath:recipeDirectory withIntermediateDirectories:NO attributes:nil error:&error];
         }
 
-        [[NSFileManager defaultManager] createFileAtPath:path contents:data attributes:nil];
-        [[self restClient] uploadFile:filename toPath:@"/recipes" fromPath:path];
+        [fileManager createFileAtPath:[self localPath] contents:data attributes:nil];
+        [[self restClient] loadMetadata:[@"/recipes" stringByAppendingPathComponent:[self filename]]];
     }
     
     return error;
@@ -191,6 +214,14 @@ NSManagedObjectContext *_managedObjectContext;
 
     ingredientsBlock.length = ingredientsEnd.location - ingredientsBlock.location;
     return [markdown substringWithRange:ingredientsBlock];
+}
+
+- (NSString *)filename {
+    return [[self slug] stringByAppendingPathExtension:@"mdown"];
+}
+
+- (NSString *)localPath {
+    return [[[self appDelegate] recipeDirectory] stringByAppendingPathComponent:[self filename]];
 }
 
 @end

@@ -43,9 +43,8 @@ NSInteger totalFiles = 0;
 }
 
 - (void)viewDidAppear:(BOOL)animated {
-    [self reloadRecipes];
     [super viewDidAppear:animated];
-    [self.tableView reloadData];
+    [self reloadRecipes];
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(UITableViewCell *)sender {
@@ -82,8 +81,13 @@ NSInteger totalFiles = 0;
 }
 
 - (void)reloadRecipes {
-    [self setRecipes:[Recipe getList]];
+    if (search.text.length > 1) {
+        [self setRecipes:[Recipe searchIngredients:search.text]];
+    } else {
+        [self setRecipes:[Recipe getList]];
+    }
     [self setTitle:[NSString stringWithFormat:@"%d recipes", [recipes count]]];
+    [self.tableView reloadData];
 }
 
 - (void)syncRecipes {
@@ -149,7 +153,6 @@ NSInteger totalFiles = 0;
     if (fileCount == 0) {
         [[Recipe managedObjectContext] save:&error];
         [self reloadRecipes];
-        [self.tableView reloadData];
     }
 }
 
@@ -224,13 +227,16 @@ NSInteger totalFiles = 0;
 #pragma mark search delegate
 
 - (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar {
-    
+    [searchBar resignFirstResponder];
 }
 
 - (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText {
+    [self reloadRecipes];
 }
 
 - (void)searchBarCancelButtonClicked:(UISearchBar *)searchBar {
+    [searchBar setText:@""];
+    [self reloadRecipes];
     [searchBar resignFirstResponder];
 }
 
