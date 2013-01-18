@@ -142,11 +142,13 @@ NSInteger totalFiles = 0;
 
 -(void)restClient:(DBRestClient *)client loadedFile:(NSString *)destPath {
     NSError *error;
-    NSString *md = [NSString stringWithContentsOfFile:destPath encoding:NSStringEncodingConversionExternalRepresentation error:&error];
     DBDeltaEntry *file = [dropboxDictionary objectForKey:destPath];
-    Recipe *r = [Recipe findOrCreate:file.lowercasePath bySource:@"dropbox"];
     
-    [r update:md];
+    if ([[file.lowercasePath pathComponents] containsObject:@"recipes"]) {
+        NSString *md = [NSString stringWithContentsOfFile:destPath encoding:NSUTF8StringEncoding error:&error];
+        Recipe *r = [Recipe findOrCreate:file.lowercasePath bySource:@"dropbox"];
+        [r update:md];
+    }
 
     fileCount--;
     [self setTitle:[NSString stringWithFormat:@"Syncing recipes (%d / %d)", totalFiles - fileCount, totalFiles]];

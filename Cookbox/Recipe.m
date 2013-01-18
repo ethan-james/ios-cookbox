@@ -156,7 +156,7 @@ NSManagedObjectContext *_managedObjectContext;
     [self clearIngredients];
     
     ingredients = [self ingredientsBlock];
-    ingredientMatches = [ingredientsRegex matchesInString:ingredients options:NSRegularExpressionUseUnixLineSeparators range:NSMakeRange(0, [ingredients length])];
+    ingredientMatches = [ingredientsRegex matchesInString:ingredients options:0 range:NSMakeRange(0, [ingredients length])];
     
     for (NSTextCheckingResult *line in ingredientMatches) {
         [self addIngredientsObject:[Ingredient new:[ingredients substringWithRange:[line rangeAtIndex:1]] forRecipe:self]];
@@ -168,7 +168,7 @@ NSManagedObjectContext *_managedObjectContext;
     [[self managedObjectContext] save:&error];
 
     if ([[DBSession sharedSession] isLinked]) {
-        NSData *data = [[self markdown] dataUsingEncoding:NSStringEncodingConversionExternalRepresentation];
+        NSData *data = [[self markdown] dataUsingEncoding:NSUTF8StringEncoding];
         NSFileManager *fileManager = [NSFileManager defaultManager];
         NSString *recipeDirectory = [[self appDelegate] recipeDirectory];
         

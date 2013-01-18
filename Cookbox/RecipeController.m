@@ -8,6 +8,7 @@
 
 #import "RecipeController.h"
 #import "RecipeSource.h"
+#import "AppDelegate.h"
 
 @interface RecipeController ()
 
@@ -18,6 +19,10 @@
 @synthesize webView;
 @synthesize recipe = _recipe;
 @synthesize recipeURL = _recipeURL;
+
+- (AppDelegate *)appDelegate {
+    return [[UIApplication sharedApplication] delegate];
+}
 
 #pragma mark accessors
 
@@ -46,6 +51,7 @@
 {
     NSError *error;
     UIBarButtonItem *saveButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemSave target:self action:@selector(saveRecipe)];
+    NSString *scrapersDirectory = [[[[self appDelegate] applicationDocumentsDirectory] path] stringByAppendingPathComponent:@"scrapers"];
 
     [super viewDidLoad];
     
@@ -54,14 +60,15 @@
     if ([self recipe] != nil) {
         [webView loadHTMLString:[[self recipe] asHTML] baseURL:[NSURL fileURLWithPath:[[NSBundle mainBundle] bundlePath]]];
     } else if ([self recipeURL] != nil) {
-        NSString *html = [NSString stringWithContentsOfURL:[self recipeURL] encoding:NSStringEncodingConversionAllowLossy error:&error];
+        NSString *html = [NSString stringWithContentsOfURL:[self recipeURL] encoding:NSUTF8StringEncoding error:&error];
         NSString *contentPath = [[[NSBundle mainBundle] bundlePath] stringByAppendingPathComponent:@"scraper.html"];
         NSString *host = [[[self recipeURL] host] stringByReplacingOccurrencesOfString:@"www." withString:@""];
-        NSString *scraperPath = [[[[NSBundle mainBundle] bundlePath] stringByAppendingPathComponent:@"scrapers"] stringByAppendingPathComponent:[host stringByAppendingPathExtension:@"mdown"]];
-        NSString *content = [NSString stringWithContentsOfFile:contentPath encoding:NSStringEncodingConversionAllowLossy error:&error];
+        NSString *scraperPath = [scrapersDirectory stringByAppendingPathComponent:[host stringByAppendingPathExtension:@"mdown"]];
+        NSString *content = [NSString stringWithContentsOfFile:contentPath encoding:NSUTF8StringEncoding error:&error];
         
         if ([[NSFileManager defaultManager] fileExistsAtPath:scraperPath]) {
-            NSString *scraper = [NSString stringWithContentsOfFile:scraperPath encoding:NSStringEncodingConversionAllowLossy error:&error];
+            NSData *data = [NSData dataWithContentsOfFile:scraperPath];
+            NSString *scraper = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
 
             content = [content stringByReplacingOccurrencesOfString:@"<%= $scraper %>" withString:scraper];
             content = [content stringByReplacingOccurrencesOfString:@"<%= $html %>" withString:html];

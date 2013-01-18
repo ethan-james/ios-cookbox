@@ -21,8 +21,17 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+    NSString *destinationDirectory = [[[[[NSFileManager defaultManager] URLsForDirectory:NSDocumentDirectory inDomains:NSUserDomainMask] lastObject] path] stringByAppendingPathComponent:@"scrapers"];
+    NSString *scrapersDirectory = [[NSBundle mainBundle] pathForResource:@"scrapers" ofType:nil];
+    NSFileManager *fileManager = [NSFileManager defaultManager];
     DBSession* dbSession = [[DBSession alloc] initWithAppKey:@"qw5gcw6gry0qj39" appSecret:@"4vnujrisulr1fih" root:kDBRootAppFolder];
+    NSError *error;
+    
     [DBSession setSharedSession:dbSession];
+    
+    if (![fileManager fileExistsAtPath:destinationDirectory]) {
+        [fileManager copyItemAtPath:scrapersDirectory toPath:destinationDirectory error:&error];
+    }
     
     return YES;
 }

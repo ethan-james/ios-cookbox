@@ -13,10 +13,10 @@
             for (var i = 0; i < str.length; i++) {
                 switch (str.charAt(i)) {
                     case "'":
-                        inSingle = !inSingle;
+                        if (!inDouble) inSingle = !inSingle;
                         break;
                     case '"':
-                        inDouble = !inDouble;
+                        if (!inSingle) inDouble = !inDouble;
                         break;
                     case sep:
                         if (!inSingle && !inDouble) {
@@ -59,7 +59,7 @@
                         match_parts[i] = attributes[match_parts[i]];
                     }
                 }
-                
+
                 if (selector) {
                     $(selector, html).each(function() {
                         $.each(this.innerHTML.split(/<br ?\/?>/), function() {

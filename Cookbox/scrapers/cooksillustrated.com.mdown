@@ -1,0 +1,14 @@
+# <%= $('h1[itemprop="name"]') %> #
+
+**Ingredients**  
+
+<%= "* " + $('[itemprop="ingredient"]') %>
+
+**Directions**  
+
+<%= "1. " + $('[itemprop="instructions"] li') %>
+
+**Quantity:** <%= $('[itemprop="yield"]') %>  
+[<%= url %>](<%= url %>)
+
+**Comments:** <%= $(".dek p") %>

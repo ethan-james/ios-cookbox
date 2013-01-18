@@ -16,5 +16,6 @@
 @property (readonly, strong, nonatomic) NSPersistentStoreCoordinator *persistentStoreCoordinator;
 
 - (NSString *)recipeDirectory;
+- (NSURL *)applicationDocumentsDirectory;
 
 @end
