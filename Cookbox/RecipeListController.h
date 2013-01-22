@@ -6,10 +6,18 @@
 //
 //
 
+#import "EDStarRating.h"
 #import <UIKit/UIKit.h>
 #import <DropboxSDK/DropboxSDK.h>
 
-@interface RecipeListController : UITableViewController <DBRestClientDelegate, UISearchBarDelegate, UISearchDisplayDelegate>
+enum {
+    RMAlphaSort = 0,
+    RMTagsSort,
+    RMRatingsSort
+};
+typedef NSUInteger RMSortMode;
+
+@interface RecipeListController : UITableViewController <DBRestClientDelegate, UISearchBarDelegate, UISearchDisplayDelegate, EDStarRatingProtocol>
     @property (nonatomic, retain) NSArray *recipes;
     @property (nonatomic, retain, readonly) IBOutlet UISearchBar *search;
 

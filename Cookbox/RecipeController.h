@@ -8,9 +8,11 @@
 
 #import <UIKit/UIKit.h>
 #import "Recipe.h"
+#import "EDStarRating.h"
 
-@interface RecipeController : UIViewController <UIWebViewDelegate, UIAlertViewDelegate>
+@interface RecipeController : UIViewController <UIWebViewDelegate, UIAlertViewDelegate, EDStarRatingProtocol>
     @property (retain,nonatomic) IBOutlet UIWebView *webView;
+    @property (retain,nonatomic) IBOutlet EDStarRating *ratingWidget;
     @property (retain,nonatomic) Recipe *recipe;
     @property (retain,nonatomic) NSURL *recipeURL;
 @end

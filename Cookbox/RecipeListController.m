@@ -23,6 +23,7 @@ DBRestClient *restClient;
 NSMutableDictionary *dropboxDictionary;
 NSInteger fileCount = 0;
 NSInteger totalFiles = 0;
+RMSortMode sortMode = RMAlphaSort;
 
 - (id)initWithStyle:(UITableViewStyle)style
 {
@@ -35,10 +36,15 @@ NSInteger totalFiles = 0;
 - (void)viewDidLoad
 {
     UIBarButtonItem *sync = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemRefresh target:self action:@selector(didPressSync)];
+//    UIBarButtonItem *alpha = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemOrganize target:self action:@selector(alphaSort)];
+//    UIBarButtonItem *tags = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemOrganize target:self action:@selector(alphaSort)];
+//    UIBarButtonItem *ratings = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"starhighlighted.png"] style:UIBarButtonItemStylePlain target:self action:@selector(ratingsSort)];
     
     [super viewDidLoad];
  
-    self.navigationItem.leftBarButtonItem = sync;
+//    self.navigationItem.leftBarButtonItems = [NSArray arrayWithObjects:tags, ratings, nil];
+//    self.navigationItem.rightBarButtonItems = [NSArray arrayWithObjects:sync, alpha, nil];
+    self.navigationItem.rightBarButtonItem = sync;
     dropboxDictionary = [[NSMutableDictionary alloc] init];
 }
 
@@ -82,7 +88,9 @@ NSInteger totalFiles = 0;
 
 - (void)reloadRecipes {
     if (search.text.length > 1) {
-        [self setRecipes:[Recipe searchIngredients:search.text]];
+        NSArray *sort = [NSArray arrayWithObject:[NSSortDescriptor sortDescriptorWithKey:@"name" ascending:YES]];
+        NSSet *r = [[NSSet setWithArray:[Recipe searchIngredients:search.text]] setByAddingObjectsFromArray:[Recipe searchTags:search.text]];
+        [self setRecipes:[r sortedArrayUsingDescriptors:sort]];
     } else {
         [self setRecipes:[Recipe getList]];
     }
@@ -174,8 +182,21 @@ NSInteger totalFiles = 0;
 {
     static NSString *CellIdentifier = @"Cell";
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
+    Recipe *recipe = [recipes objectAtIndex:indexPath.row];
+    UILabel *recipeName = (UILabel *)[cell viewWithTag:100];
+    EDStarRating *rating = (EDStarRating *)[cell viewWithTag:200];
+    UILabel *tagList = (UILabel *)[cell viewWithTag:300];
     
-    [cell.textLabel setText:[[recipes objectAtIndex:indexPath.row] name]];
+    rating.starImage = [UIImage imageNamed:@"star.png"];
+    rating.starHighlightedImage = [UIImage imageNamed:@"starhighlighted.png"];
+    rating.maxRating = 5.0;
+    rating.delegate = self;
+    rating.editable=NO;
+    rating.displayMode=EDStarRatingDisplayFull;
+    rating.rating = [recipe.rating floatValue];
+
+    [recipeName setText:[recipe name]];
+    [tagList setText:[recipe tagList]];
     
     return cell;
 }

@@ -21,6 +21,8 @@
 @property (nonatomic, retain) NSString * comments;
 @property (nonatomic, retain) NSString * markdown;
 @property (nonatomic, retain) NSSet *ingredients;
+@property (nonatomic, retain) NSSet *tags;
+@property (nonatomic, retain) NSNumber *rating;
 @property (nonatomic, retain) DBRestClient *restClient;
 
 @end
@@ -33,11 +35,14 @@
 - (void)removeIngredients:(NSSet *)values;
 - (void)update:(NSString *)markdown;
 - (NSError *)save;
+- (NSString *)tagList;
 - (NSString *)asHTML;
+- (void)changeRating:(NSNumber *)r;
 
 + (NSManagedObjectContext *)managedObjectContext;
 + (Recipe *)findOrCreate:(NSString *)identifier bySource:(NSString *)source;
 + (NSArray *)getList;
 + (NSArray *)searchIngredients:(NSString *)s;
++ (NSArray *)searchTags:(NSString *)s;
 
 @end

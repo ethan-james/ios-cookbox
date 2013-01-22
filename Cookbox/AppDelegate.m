@@ -9,6 +9,7 @@
 #import "AppDelegate.h"
 #import "RecipeListController.h"
 #import "RecipeController.h"
+#import "EDStarRating.h"
 #import <DropboxSDK/DropboxSDK.h>
 #import <CoreData/CoreData.h>
 
@@ -32,7 +33,7 @@
     if (![fileManager fileExistsAtPath:destinationDirectory]) {
         [fileManager copyItemAtPath:scrapersDirectory toPath:destinationDirectory error:&error];
     }
-    
+        
     return YES;
 }
 							

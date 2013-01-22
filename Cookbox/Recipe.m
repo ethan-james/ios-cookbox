@@ -10,6 +10,7 @@
 #import "Ingredient.h"
 #import "AppDelegate.h"
 #import "RecipeSource.h"
+#import "Tag.h"
 #import <GHMarkdownParser/GHMarkdownParser/GHMarkdownParser.h>
 
 @implementation Recipe
@@ -23,6 +24,8 @@
 @dynamic comments;
 @dynamic markdown;
 @dynamic ingredients;
+@dynamic rating;
+@dynamic tags;
 
 @synthesize restClient;
 
@@ -138,6 +141,28 @@ NSManagedObjectContext *_managedObjectContext;
     return [recipes sortedArrayUsingDescriptors:sort];
 }
 
++ (NSArray *)searchTags:(NSString *)s {
+    NSManagedObjectContext *moc = [self managedObjectContext];
+    NSFetchRequest *request = [[NSFetchRequest alloc] init];
+    NSEntityDescription *i = [NSEntityDescription entityForName:@"Tag" inManagedObjectContext:moc];
+    NSArray *sort = [NSArray arrayWithObject:[NSSortDescriptor sortDescriptorWithKey:@"name" ascending:YES]];
+    NSPredicate *searchPredicate = [NSPredicate predicateWithFormat:@"tag CONTAINS %@", s];
+    NSError *error;
+    NSArray *tags;
+    NSMutableSet *recipes = [[NSMutableSet alloc] init];
+    
+    [request setEntity:i];
+    [request setPredicate:searchPredicate];
+    
+    tags = [moc executeFetchRequest:request error:&error];
+    for (Tag *tag in tags) {
+        [recipes addObjectsFromArray:[tag.recipes sortedArrayUsingDescriptors:sort]];
+    }
+    
+    return [recipes sortedArrayUsingDescriptors:sort];
+}
+
+
 # pragma mark CRUD helpers
 
 - (void)update:(NSString *)markdown {
@@ -187,6 +212,16 @@ NSManagedObjectContext *_managedObjectContext;
     for (NSManagedObject *ingredient in [self ingredients]) {
         [[self managedObjectContext] deleteObject:ingredient];
     }
+}
+
+- (void)changeRating:(NSNumber *)r {
+    NSError *error;
+    self.rating = r;
+    [[self managedObjectContext] save:&error];
+}
+
+- (NSString *)tagList {
+    return [[[self.tags sortedArrayUsingDescriptors:[NSArray arrayWithObject:[NSSortDescriptor sortDescriptorWithKey:@"tag" ascending:YES]]] mutableArrayValueForKey:@"tag"] componentsJoinedByString:@" "];
 }
 
 #pragma mark formatting helpers

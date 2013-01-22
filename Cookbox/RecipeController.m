@@ -9,6 +9,7 @@
 #import "RecipeController.h"
 #import "RecipeSource.h"
 #import "AppDelegate.h"
+#import <QuartzCore/CALayer.h>
 
 @interface RecipeController ()
 
@@ -19,6 +20,7 @@
 @synthesize webView;
 @synthesize recipe = _recipe;
 @synthesize recipeURL = _recipeURL;
+@synthesize ratingWidget;
 
 - (AppDelegate *)appDelegate {
     return [[UIApplication sharedApplication] delegate];
@@ -51,14 +53,28 @@
 {
     NSError *error;
     UIBarButtonItem *saveButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemSave target:self action:@selector(saveRecipe)];
+    UIBarButtonItem *tagsButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemOrganize target:self action:@selector(tags)];
     NSString *scrapersDirectory = [[[[self appDelegate] applicationDocumentsDirectory] path] stringByAppendingPathComponent:@"scrapers"];
+    
+    ratingWidget.starImage = [UIImage imageNamed:@"star.png"];
+    ratingWidget.starHighlightedImage = [UIImage imageNamed:@"starhighlighted.png"];
+    ratingWidget.maxRating = 5.0;
+    ratingWidget.delegate = self;
+    ratingWidget.horizontalMargin = 0;
+    ratingWidget.editable=YES;
+    ratingWidget.displayMode=EDStarRatingDisplayHalf;
 
     [super viewDidLoad];
     
-    self.navigationItem.rightBarButtonItem = saveButton;
+    self.navigationItem.rightBarButtonItems = [NSArray arrayWithObjects:saveButton, tagsButton, nil];
     
     if ([self recipe] != nil) {
-        [webView loadHTMLString:[[self recipe] asHTML] baseURL:[NSURL fileURLWithPath:[[NSBundle mainBundle] bundlePath]]];
+        NSError *error;
+        NSString *recipe = [[self recipe] asHTML];
+        NSURL *baseURL = [NSURL fileURLWithPath:[[NSBundle mainBundle] bundlePath]];
+        NSString *recipeTemplate = [NSString stringWithContentsOfFile:[[baseURL URLByAppendingPathComponent:@"recipe-template.html"] path] encoding:NSUTF8StringEncoding error:&error];
+
+        [webView loadHTMLString:[recipeTemplate stringByReplacingOccurrencesOfString:@"<%= $recipe %>" withString:recipe] baseURL:baseURL];
     } else if ([self recipeURL] != nil) {
         NSString *html = [NSString stringWithContentsOfURL:[self recipeURL] encoding:NSUTF8StringEncoding error:&error];
         NSString *contentPath = [[[NSBundle mainBundle] bundlePath] stringByAppendingPathComponent:@"scraper.html"];
@@ -93,6 +109,16 @@
     [[self recipe] save];
 }
 
+- (void)tags {
+    [self performSegueWithIdentifier:@"OpenTags" sender:self];
+}
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    if ([@"OpenTags" isEqualToString:segue.identifier]) {
+        [segue.destinationViewController setRecipe:[self recipe]];
+    }
+}
+
 #pragma mark UIWebView delegate
 
 - (void)webViewDidFinishLoad:(UIWebView *)wv {
@@ -114,6 +140,12 @@
 
 - (void)alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex {
     [self dismissModalViewControllerAnimated:YES];
+}
+
+#pragma mark EDStarRating delegate
+
+- (void)starsSelectionChanged:(EDStarRating *)control rating:(float)rating {
+    [self.recipe changeRating:[NSNumber numberWithFloat:rating]];
 }
 
 @end
