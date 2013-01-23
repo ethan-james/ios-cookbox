@@ -108,11 +108,93 @@
                         <outlet property="ratingWidget" destination="poc-rJ-pIj" id="RCB-x3-vQa"/>
                         <outlet property="webView" destination="msH-lR-VZm" id="fkd-7j-KwP"/>
                         <segue destination="TKX-Hf-tV6" kind="push" identifier="OpenTags" id="ReY-aE-FTh"/>
+                        <segue destination="e8d-JB-9UB" kind="push" identifier="OpenPhotos" id="C8l-5q-5ee"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="VU1-GG-jGp" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="646" y="-372"/>
+        </scene>
+        <!--Photo Gallery Controller-->
+        <scene sceneID="mLN-AN-CmB">
+            <objects>
+                <collectionViewController autoresizesArchivedViewToFullSize="NO" id="e8d-JB-9UB" customClass="PhotoGalleryController" sceneMemberID="viewController">
+                    <collectionView key="view" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" minimumZoomScale="0.0" maximumZoomScale="0.0" dataMode="prototypes" id="Ytv-27-3D5">
+                        <rect key="frame" x="0.0" y="64" width="320" height="416"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="PfE-MS-Xo9">
+                            <size key="itemSize" width="100" height="100"/>
+                            <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                            <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                            <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                        </collectionViewFlowLayout>
+                        <cells>
+                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="Cell" id="cvs-k4-lT0">
+                                <rect key="frame" x="0.0" y="0.0" width="100" height="100"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                    <rect key="frame" x="0.0" y="0.0" width="100" height="100"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <imageView userInteractionEnabled="NO" tag="100" contentMode="scaleToFill" id="rU8-fm-dqp">
+                                            <rect key="frame" x="0.0" y="0.0" width="100" height="100"/>
+                                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                        </imageView>
+                                    </subviews>
+                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                </view>
+                            </collectionViewCell>
+                        </cells>
+                        <connections>
+                            <outlet property="dataSource" destination="e8d-JB-9UB" id="Lpi-h3-UJe"/>
+                            <outlet property="delegate" destination="e8d-JB-9UB" id="heV-YI-oKa"/>
+                        </connections>
+                    </collectionView>
+                    <navigationItem key="navigationItem" id="yY5-Sz-Onk"/>
+                    <connections>
+                        <segue destination="B2h-OE-Pqe" kind="push" identifier="AddPhoto" id="cd3-1L-4Fi"/>
+                        <segue destination="POB-af-9XY" kind="push" identifier="ViewPhoto" id="HQg-Ev-z82"/>
+                    </connections>
+                </collectionViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="GPs-mD-ub3" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1186" y="321"/>
+        </scene>
+        <!--Photo Controller-->
+        <scene sceneID="tCx-Ye-cln">
+            <objects>
+                <viewController id="POB-af-9XY" customClass="PhotoController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="feg-nR-U5a">
+                        <rect key="frame" x="0.0" y="64" width="320" height="416"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" tag="100" contentMode="scaleToFill" id="vRe-lW-SS0">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="416"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="Jyz-8Z-ea1"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="p6G-Tp-sKp" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1778" y="996"/>
+        </scene>
+        <!--Image Picker Controller-->
+        <scene sceneID="Uag-GS-7KS">
+            <objects>
+                <viewController id="B2h-OE-Pqe" customClass="UIImagePickerController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="hvx-uf-KeJ">
+                        <rect key="frame" x="0.0" y="64" width="320" height="416"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="5Ec-35-TjI"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="t2q-td-PmI" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1778" y="321"/>
         </scene>
         <!--Tag Controller - Add Tag-->
         <scene sceneID="g4l-VR-Zk5">
@@ -174,6 +256,48 @@
     <resources>
         <image name="starsbackground.png" width="151" height="29"/>
     </resources>
+    <classes>
+        <class className="EDStarRating" superclassName="UIControl">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/EDStarRating.h"/>
+        </class>
+        <class className="PhotoController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/PhotoController.h"/>
+        </class>
+        <class className="PhotoGalleryController" superclassName="UICollectionViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/PhotoGalleryController.h"/>
+        </class>
+        <class className="RecipeController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/RecipeController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="ratingWidget" candidateClass="EDStarRating"/>
+                <relationship kind="outlet" name="webView" candidateClass="UIWebView"/>
+            </relationships>
+        </class>
+        <class className="RecipeListController" superclassName="UITableViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/RecipeListController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="search" candidateClass="UISearchBar"/>
+            </relationships>
+        </class>
+        <class className="TagController" superclassName="UITableViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/TagController.h"/>
+        </class>
+        <class className="UICollectionReusableView" superclassName="UIView">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/UICollectionReusableView.h"/>
+        </class>
+        <class className="UICollectionViewCell" superclassName="UICollectionReusableView">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/UICollectionViewCell.h"/>
+        </class>
+        <class className="UICollectionViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/UICollectionViewController.h"/>
+        </class>
+        <class className="UICollectionViewFlowLayout" superclassName="UICollectionViewLayout">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/UICollectionViewFlowLayout.h"/>
+        </class>
+        <class className="UICollectionViewLayout" superclassName="NSObject">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/UICollectionViewLayout.h"/>
+        </class>
+    </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>

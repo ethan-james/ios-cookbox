@@ -53,7 +53,8 @@
 {
     NSError *error;
     UIBarButtonItem *saveButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemSave target:self action:@selector(saveRecipe)];
-    UIBarButtonItem *tagsButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemOrganize target:self action:@selector(tags)];
+    UIBarButtonItem *tagsButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"tag.png"] style:UIBarButtonItemStylePlain target:self action:@selector(tags)];
+    UIBarButtonItem *photoButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCamera target:self action:@selector(openPhotos)];
     NSString *scrapersDirectory = [[[[self appDelegate] applicationDocumentsDirectory] path] stringByAppendingPathComponent:@"scrapers"];
     
     ratingWidget.starImage = [UIImage imageNamed:@"star.png"];
@@ -63,10 +64,11 @@
     ratingWidget.horizontalMargin = 0;
     ratingWidget.editable=YES;
     ratingWidget.displayMode=EDStarRatingDisplayHalf;
+    ratingWidget.rating = [[[self recipe] rating] floatValue];
 
     [super viewDidLoad];
     
-    self.navigationItem.rightBarButtonItems = [NSArray arrayWithObjects:saveButton, tagsButton, nil];
+    self.navigationItem.rightBarButtonItems = [NSArray arrayWithObjects:saveButton, tagsButton, photoButton, nil];
     
     if ([self recipe] != nil) {
         NSError *error;
@@ -113,8 +115,14 @@
     [self performSegueWithIdentifier:@"OpenTags" sender:self];
 }
 
+- (void)openPhotos {
+    [self performSegueWithIdentifier:@"OpenPhotos" sender:self];
+}
+
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     if ([@"OpenTags" isEqualToString:segue.identifier]) {
+        [segue.destinationViewController setRecipe:[self recipe]];
+    } else if ([@"OpenPhotos" isEqualToString:segue.identifier]) {
         [segue.destinationViewController setRecipe:[self recipe]];
     }
 }

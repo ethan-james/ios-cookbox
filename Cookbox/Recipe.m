@@ -26,6 +26,7 @@
 @dynamic ingredients;
 @dynamic rating;
 @dynamic tags;
+@dynamic media;
 
 @synthesize restClient;
 

@@ -12,13 +12,14 @@
 
 enum {
     RMAlphaSort = 0,
-    RMTagsSort,
+    RMTagSort,
     RMRatingsSort
 };
 typedef NSUInteger RMSortMode;
 
 @interface RecipeListController : UITableViewController <DBRestClientDelegate, UISearchBarDelegate, UISearchDisplayDelegate, EDStarRatingProtocol>
     @property (nonatomic, retain) NSArray *recipes;
+    @property (nonatomic, retain) NSArray *tagList;
     @property (nonatomic, retain, readonly) IBOutlet UISearchBar *search;
 
     - (void)syncRecipes;

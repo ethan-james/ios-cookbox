@@ -22,6 +22,7 @@
 @property (nonatomic, retain) NSString * markdown;
 @property (nonatomic, retain) NSSet *ingredients;
 @property (nonatomic, retain) NSSet *tags;
+@property (nonatomic, retain) NSSet *media;
 @property (nonatomic, retain) NSNumber *rating;
 @property (nonatomic, retain) DBRestClient *restClient;
 
@@ -33,6 +34,10 @@
 - (void)removeIngredientsObject:(NSManagedObject *)value;
 - (void)addIngredients:(NSSet *)values;
 - (void)removeIngredients:(NSSet *)values;
+- (void)addMediaObject:(NSManagedObject *)value;
+- (void)removeMediaObject:(NSManagedObject *)value;
+- (void)addMedias:(NSSet *)values;
+- (void)removeMedias:(NSSet *)values;
 - (void)update:(NSString *)markdown;
 - (NSError *)save;
 - (NSString *)tagList;

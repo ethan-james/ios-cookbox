@@ -25,6 +25,7 @@
 - (void)removeRecipes:(NSSet *)values;
 - (NSError *)save;
 
++ (NSArray *)getList;
 + (Tag *)findOrCreate:(NSString *)text;
 + (NSArray *)search:(NSString *)text;
 

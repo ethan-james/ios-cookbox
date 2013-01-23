@@ -28,6 +28,19 @@ NSManagedObjectContext *_managedObjectContext;
     return _managedObjectContext;
 }
 
++ (NSArray *)getList {
+    NSManagedObjectContext *moc = [self managedObjectContext];
+    NSFetchRequest *request = [[NSFetchRequest alloc] init];
+    NSEntityDescription *t = [NSEntityDescription entityForName:@"Tag" inManagedObjectContext:moc];
+    NSArray *sort = [NSArray arrayWithObject:[NSSortDescriptor sortDescriptorWithKey:@"tag" ascending:YES]];
+    NSError *error;
+    
+    [request setEntity:t];
+    [request setSortDescriptors:sort];
+    
+    return [moc executeFetchRequest:request error:&error];
+}
+
 + (NSArray *)search:(NSString *)text {
     NSManagedObjectContext *moc = [self managedObjectContext];
     NSFetchRequest *request = [[NSFetchRequest alloc] init];

@@ -10,6 +10,7 @@
 #import "RecipeController.h"
 #import <DropboxSDK/DBDeltaEntry.h>
 #import "Recipe.h"
+#import "Tag.h"
 
 @interface RecipeListController ()
 
@@ -18,11 +19,16 @@
 @implementation RecipeListController
 
 @synthesize recipes;
+@synthesize tagList;
 @synthesize search;
 DBRestClient *restClient;
 NSMutableDictionary *dropboxDictionary;
 NSInteger fileCount = 0;
 NSInteger totalFiles = 0;
+
+NSSortDescriptor *alphaSort;
+NSSortDescriptor *ratingsSort;
+NSSortDescriptor *tagSort;
 RMSortMode sortMode = RMAlphaSort;
 
 - (id)initWithStyle:(UITableViewStyle)style
@@ -36,15 +42,19 @@ RMSortMode sortMode = RMAlphaSort;
 - (void)viewDidLoad
 {
     UIBarButtonItem *sync = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemRefresh target:self action:@selector(didPressSync)];
-//    UIBarButtonItem *alpha = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemOrganize target:self action:@selector(alphaSort)];
-//    UIBarButtonItem *tags = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemOrganize target:self action:@selector(alphaSort)];
-//    UIBarButtonItem *ratings = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"starhighlighted.png"] style:UIBarButtonItemStylePlain target:self action:@selector(ratingsSort)];
+    UIBarButtonItem *alpha = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"alpha.png"] style:UIBarButtonItemStylePlain target:self action:@selector(alphaSort)];
+    UIBarButtonItem *tags = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"tag.png"] style:UIBarButtonItemStylePlain target:self action:@selector(tagSort)];
+    UIBarButtonItem *ratings = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"starhighlighted.png"] style:UIBarButtonItemStylePlain target:self action:@selector(ratingsSort)];
     
     [super viewDidLoad];
- 
-//    self.navigationItem.leftBarButtonItems = [NSArray arrayWithObjects:tags, ratings, nil];
-//    self.navigationItem.rightBarButtonItems = [NSArray arrayWithObjects:sync, alpha, nil];
-    self.navigationItem.rightBarButtonItem = sync;
+
+    
+    alphaSort = [NSSortDescriptor sortDescriptorWithKey:@"name" ascending:YES];
+    ratingsSort = [NSSortDescriptor sortDescriptorWithKey:@"rating" ascending:NO];
+    tagSort = [NSSortDescriptor sortDescriptorWithKey:@"tag" ascending:YES];
+    
+    self.navigationItem.leftBarButtonItems = [NSArray arrayWithObjects:tags, ratings, nil];
+    self.navigationItem.rightBarButtonItems = [NSArray arrayWithObjects:sync, alpha, nil];
     dropboxDictionary = [[NSMutableDictionary alloc] init];
 }
 
@@ -67,6 +77,43 @@ RMSortMode sortMode = RMAlphaSort;
     // Dispose of any resources that can be recreated.
 }
 
+#pragma mark manage data source
+
+- (void)reloadRecipes {
+    switch (sortMode) {
+        case RMAlphaSort:
+            [self setRecipes:[self getRecipes:[NSArray arrayWithObject:alphaSort]]];
+            break;
+        case RMTagSort:
+            [self setTagList:[self getTags:[NSArray arrayWithObject:tagSort]]];
+            break;
+        case RMRatingsSort:
+            [self setRecipes:[self getRecipes:[NSArray arrayWithObjects:ratingsSort, alphaSort, nil]]];
+            break;
+    }
+    
+    [self setTitle:[NSString stringWithFormat:@"%d recipes", [recipes count]]];
+    [self.tableView reloadData];
+}
+
+- (NSArray *)getRecipes:(NSArray *)sortDescriptors {
+    if (search.text.length > 1) {
+        NSArray *ingredientSearch = [Recipe searchIngredients:search.text];
+        NSArray *tagSearch = [Recipe searchTags:search.text];
+        return [[[NSSet setWithArray:ingredientSearch] setByAddingObjectsFromArray:tagSearch] sortedArrayUsingDescriptors:sortDescriptors];
+    } else {
+        return [[Recipe getList] sortedArrayUsingDescriptors:sortDescriptors];
+    }
+}
+
+- (NSArray *)getTags:(NSArray *)sortDescriptors {
+    if (search.text.length > 1) {
+        return [Tag search:search.text];
+    } else {
+        return [Tag getList];
+    }
+}
+
 #pragma mark dropbox
 
 - (DBRestClient *)restClient {
@@ -84,18 +131,6 @@ RMSortMode sortMode = RMAlphaSort;
     } else {
         [[DBSession sharedSession] linkFromController:self];
     }
-}
-
-- (void)reloadRecipes {
-    if (search.text.length > 1) {
-        NSArray *sort = [NSArray arrayWithObject:[NSSortDescriptor sortDescriptorWithKey:@"name" ascending:YES]];
-        NSSet *r = [[NSSet setWithArray:[Recipe searchIngredients:search.text]] setByAddingObjectsFromArray:[Recipe searchTags:search.text]];
-        [self setRecipes:[r sortedArrayUsingDescriptors:sort]];
-    } else {
-        [self setRecipes:[Recipe getList]];
-    }
-    [self setTitle:[NSString stringWithFormat:@"%d recipes", [recipes count]]];
-    [self.tableView reloadData];
 }
 
 - (void)syncRecipes {
@@ -170,22 +205,34 @@ RMSortMode sortMode = RMAlphaSort;
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return 1;
+    return (sortMode == RMTagSort) ? [tagList count] : 1;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return [recipes count];
+    return (sortMode == RMTagSort) ? [[[tagList objectAtIndex:section] recipes] count] : [recipes count];
+}
+
+- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
+    return (sortMode == RMTagSort) ? [(Tag *)[tagList objectAtIndex:section] tag] : nil;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     static NSString *CellIdentifier = @"Cell";
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
-    Recipe *recipe = [recipes objectAtIndex:indexPath.row];
+    Recipe *recipe;
     UILabel *recipeName = (UILabel *)[cell viewWithTag:100];
     EDStarRating *rating = (EDStarRating *)[cell viewWithTag:200];
     UILabel *tagList = (UILabel *)[cell viewWithTag:300];
+    
+    if (sortMode == RMTagSort) {
+        NSArray *sort = [NSArray arrayWithObject:[NSSortDescriptor sortDescriptorWithKey:@"name" ascending:YES]];
+        NSArray *r = [[[[self tagList] objectAtIndex:indexPath.section] recipes] sortedArrayUsingDescriptors:sort];
+        recipe = [r objectAtIndex:indexPath.row];
+    } else {
+        recipe = [recipes objectAtIndex:indexPath.row];
+    }
     
     rating.starImage = [UIImage imageNamed:@"star.png"];
     rating.starHighlightedImage = [UIImage imageNamed:@"starhighlighted.png"];
@@ -261,6 +308,23 @@ RMSortMode sortMode = RMAlphaSort;
     [searchBar setText:@""];
     [self reloadRecipes];
     [searchBar resignFirstResponder];
+}
+
+#pragma mark nav buttons
+
+- (void)ratingsSort {
+    sortMode = RMRatingsSort;
+    [self reloadRecipes];
+}
+
+- (void)alphaSort {
+    sortMode = RMAlphaSort;
+    [self reloadRecipes];
+}
+
+- (void)tagSort {
+    sortMode = RMTagSort;
+    [self reloadRecipes];
 }
 
 @end
