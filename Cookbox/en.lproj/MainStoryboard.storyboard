@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="2.0" toolsVersion="2844" systemVersion="11G63" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="NZe-u7-937">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="2.0" toolsVersion="2844" systemVersion="12C60" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="NZe-u7-937">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="1930"/>
     </dependencies>
@@ -152,7 +152,6 @@
                     </collectionView>
                     <navigationItem key="navigationItem" id="yY5-Sz-Onk"/>
                     <connections>
-                        <segue destination="B2h-OE-Pqe" kind="push" identifier="AddPhoto" id="cd3-1L-4Fi"/>
                         <segue destination="POB-af-9XY" kind="push" identifier="ViewPhoto" id="HQg-Ev-z82"/>
                     </connections>
                 </collectionViewController>
@@ -179,22 +178,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="p6G-Tp-sKp" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1778" y="996"/>
-        </scene>
-        <!--Image Picker Controller-->
-        <scene sceneID="Uag-GS-7KS">
-            <objects>
-                <viewController id="B2h-OE-Pqe" customClass="UIImagePickerController" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="hvx-uf-KeJ">
-                        <rect key="frame" x="0.0" y="64" width="320" height="416"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-                    </view>
-                    <navigationItem key="navigationItem" id="5Ec-35-TjI"/>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="t2q-td-PmI" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1778" y="321"/>
+            <point key="canvasLocation" x="1746" y="321"/>
         </scene>
         <!--Tag Controller - Add Tag-->
         <scene sceneID="g4l-VR-Zk5">
@@ -257,7 +241,7 @@
         <image name="starsbackground.png" width="151" height="29"/>
     </resources>
     <classes>
-        <class className="EDStarRating" superclassName="UIControl">
+        <class className="EDStarRating" superclassName="EDControl">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/EDStarRating.h"/>
         </class>
         <class className="PhotoController" superclassName="UIViewController">
@@ -293,9 +277,6 @@
         </class>
         <class className="UICollectionViewFlowLayout" superclassName="UICollectionViewLayout">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/UICollectionViewFlowLayout.h"/>
-        </class>
-        <class className="UICollectionViewLayout" superclassName="NSObject">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/UICollectionViewLayout.h"/>
         </class>
     </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">

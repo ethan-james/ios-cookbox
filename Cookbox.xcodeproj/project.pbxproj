@@ -20,10 +20,8 @@
 		47165475163B0E14006FA8E6 /* CookboxTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 47165474163B0E14006FA8E6 /* CookboxTests.m */; };
 		4721772716B04B1800D0488E /* alpha.png in Resources */ = {isa = PBXBuildFile; fileRef = 4721772616B04B1800D0488E /* alpha.png */; };
 		4721772916B04C8E00D0488E /* tag.png in Resources */ = {isa = PBXBuildFile; fileRef = 4721772816B04C8E00D0488E /* tag.png */; };
-		4721772C16B0676300D0488E /* PhotoGalleryController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4721772B16B0676300D0488E /* PhotoGalleryController.m */; };
 		4721773016B0705700D0488E /* Media.m in Sources */ = {isa = PBXBuildFile; fileRef = 4721772F16B0705700D0488E /* Media.m */; };
 		4721773216B0880400D0488E /* AssetsLibrary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4721773116B0880400D0488E /* AssetsLibrary.framework */; };
-		4721773516B08B7C00D0488E /* PhotoController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4721773416B08B7C00D0488E /* PhotoController.m */; };
 		4742B3461695DB7700E076AB /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 4742B3441695DB7700E076AB /* Model.xcdatamodeld */; };
 		4742B34E1695E33700E076AB /* RecipeSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 4742B34D1695E33700E076AB /* RecipeSource.m */; };
 		4742B3501695E3D000E076AB /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4742B34F1695E3D000E076AB /* CoreData.framework */; };
@@ -53,6 +51,8 @@
 		47D77B85169B382500A4AEF8 /* recipes in Resources */ = {isa = PBXBuildFile; fileRef = 47D77B84169B382500A4AEF8 /* recipes */; };
 		47D77B87169B402800A4AEF8 /* scrapers in Resources */ = {isa = PBXBuildFile; fileRef = 47D77B86169B402800A4AEF8 /* scrapers */; };
 		47DD9D8D16972D4F00499581 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 47DD9D8C16972D4F00499581 /* main.m */; };
+		AA30DF7216B0EB7A00A979B8 /* PhotoGalleryController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4721772B16B0676300D0488E /* PhotoGalleryController.m */; settings = {COMPILER_FLAGS = "-all_load -ObjC"; }; };
+		AA30DF7316B0EB8300A979B8 /* PhotoController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4721773416B08B7C00D0488E /* PhotoController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -100,7 +100,7 @@
 		4721772816B04C8E00D0488E /* tag.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tag.png; sourceTree = "<group>"; };
 		4721772A16B0676300D0488E /* PhotoGalleryController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhotoGalleryController.h; sourceTree = "<group>"; };
 		4721772B16B0676300D0488E /* PhotoGalleryController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhotoGalleryController.m; sourceTree = "<group>"; };
-		4721772D16B06F6A00D0488E /* Media.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = file; path = Media.xcdatamodel; sourceTree = "<group>"; };
+		4721772D16B06F6A00D0488E /* Media.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Media.xcdatamodel; sourceTree = "<group>"; };
 		4721772E16B0705700D0488E /* Media.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Media.h; sourceTree = "<group>"; };
 		4721772F16B0705700D0488E /* Media.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Media.m; sourceTree = "<group>"; };
 		4721773116B0880400D0488E /* AssetsLibrary.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AssetsLibrary.framework; path = System/Library/Frameworks/AssetsLibrary.framework; sourceTree = SDKROOT; };
@@ -431,6 +431,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AA30DF7316B0EB8300A979B8 /* PhotoController.m in Sources */,
+				AA30DF7216B0EB7A00A979B8 /* PhotoGalleryController.m in Sources */,
 				4716545A163B0E14006FA8E6 /* AppDelegate.m in Sources */,
 				479410301694C1DC00333176 /* RecipeListController.m in Sources */,
 				4742B3461695DB7700E076AB /* Model.xcdatamodeld in Sources */,
@@ -442,9 +444,7 @@
 				474853BB16976A5600EA7360 /* RecipeController.m in Sources */,
 				47C2F0B716AF1F25001B2D4A /* TagController.m in Sources */,
 				47C2F0BA16AF218E001B2D4A /* Tag.m in Sources */,
-				4721772C16B0676300D0488E /* PhotoGalleryController.m in Sources */,
 				4721773016B0705700D0488E /* Media.m in Sources */,
-				4721773516B08B7C00D0488E /* PhotoController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

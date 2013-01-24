@@ -219,8 +219,7 @@ RMSortMode sortMode = RMAlphaSort;
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    static NSString *CellIdentifier = @"Cell";
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Cell"];
     Recipe *recipe;
     UILabel *recipeName = (UILabel *)[cell viewWithTag:100];
     EDStarRating *rating = (EDStarRating *)[cell viewWithTag:200];
