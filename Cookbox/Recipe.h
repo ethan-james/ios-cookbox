@@ -24,6 +24,7 @@
 @property (nonatomic, retain) NSSet *tags;
 @property (nonatomic, retain) NSSet *media;
 @property (nonatomic, retain) NSNumber *rating;
+@property BOOL deleted;
 @property (nonatomic, retain) DBRestClient *restClient;
 
 @end
@@ -34,6 +35,8 @@
 - (void)removeIngredientsObject:(NSManagedObject *)value;
 - (void)addIngredients:(NSSet *)values;
 - (void)removeIngredients:(NSSet *)values;
+- (void)removeTags:(NSSet *)values;
+- (void)removeTagsObject:(NSManagedObject *)value;
 - (void)addMediaObject:(NSManagedObject *)value;
 - (void)removeMediaObject:(NSManagedObject *)value;
 - (void)addMedias:(NSSet *)values;
@@ -43,6 +46,8 @@
 - (NSString *)tagList;
 - (NSString *)asHTML;
 - (void)changeRating:(NSNumber *)r;
+- (BOOL)isNew;
+- (void)delete;
 
 + (NSManagedObjectContext *)managedObjectContext;
 + (Recipe *)findOrCreate:(NSString *)identifier bySource:(NSString *)source;

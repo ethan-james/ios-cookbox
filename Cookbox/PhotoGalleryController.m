@@ -137,7 +137,7 @@ NSArray *sortArray;
         PhotoController *c = [segue destinationViewController];
         NSIndexPath *indexPath = [[self collectionView] indexPathForCell:sender];
         Media *media = [mediaCache objectAtIndex:indexPath.row];
-        [c setImageSrc:[media url]];
+//        [c setImageSrc:[media url]];
     }
 }
 

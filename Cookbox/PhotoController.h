@@ -7,9 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "Recipe.h"
 
-@interface PhotoController : UIViewController
+@interface PhotoController : UIViewController <UIImagePickerControllerDelegate,
+UINavigationControllerDelegate>
 
-@property (nonatomic, retain) NSString *imageSrc;
+@property (nonatomic, retain) Recipe *recipe;
 
 @end

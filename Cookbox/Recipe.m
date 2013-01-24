@@ -27,6 +27,7 @@
 @dynamic rating;
 @dynamic tags;
 @dynamic media;
+@dynamic deleted;
 
 @synthesize restClient;
 
@@ -113,10 +114,12 @@ NSManagedObjectContext *_managedObjectContext;
     NSFetchRequest *request = [[NSFetchRequest alloc] init];
     NSEntityDescription *r = [NSEntityDescription entityForName:@"Recipe" inManagedObjectContext:moc];
     NSArray *sort = [NSArray arrayWithObject:[NSSortDescriptor sortDescriptorWithKey:@"name" ascending:YES]];
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"deleted = %d", NO];
     NSError *error;
     
     [request setEntity:r];
     [request setSortDescriptors:sort];
+    [request setPredicate:predicate];
     
     return [moc executeFetchRequest:request error:&error];
 }
@@ -136,7 +139,7 @@ NSManagedObjectContext *_managedObjectContext;
     
     ingredients = [moc executeFetchRequest:request error:&error];
     for (Ingredient *ingredient in ingredients) {
-        [recipes addObject:ingredient.recipe];
+        if (!ingredient.recipe.deleted) [recipes addObject:ingredient.recipe];
     }
 
     return [recipes sortedArrayUsingDescriptors:sort];
@@ -157,7 +160,9 @@ NSManagedObjectContext *_managedObjectContext;
     
     tags = [moc executeFetchRequest:request error:&error];
     for (Tag *tag in tags) {
-        [recipes addObjectsFromArray:[tag.recipes sortedArrayUsingDescriptors:sort]];
+        NSPredicate *predicate = [NSPredicate predicateWithFormat:@"deleted = %d", NO];
+        NSSet *filtered = [tag.recipes filteredSetUsingPredicate:predicate];
+        [recipes addObjectsFromArray:[filtered sortedArrayUsingDescriptors:sort]];
     }
     
     return [recipes sortedArrayUsingDescriptors:sort];
@@ -223,6 +228,22 @@ NSManagedObjectContext *_managedObjectContext;
 
 - (NSString *)tagList {
     return [[[self.tags sortedArrayUsingDescriptors:[NSArray arrayWithObject:[NSSortDescriptor sortDescriptorWithKey:@"tag" ascending:YES]]] mutableArrayValueForKey:@"tag"] componentsJoinedByString:@" "];
+}
+
+-(BOOL)isNew {
+    NSDictionary *vals = [self committedValuesForKeys:nil];
+    return [vals count] == 0;
+}
+
+- (void)delete {
+    NSManagedObjectContext *moc = [self managedObjectContext];
+    if ([self isNew]) {
+        [moc deleteObject:self];
+    } else {
+        NSError *error;
+        [self setDeleted:YES];
+        [moc save:&error];
+    }
 }
 
 #pragma mark formatting helpers

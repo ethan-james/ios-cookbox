@@ -118,8 +118,7 @@ RMSortMode sortMode = RMAlphaSort;
 
 - (DBRestClient *)restClient {
     if (!restClient) {
-        restClient =
-        [[DBRestClient alloc] initWithSession:[DBSession sharedSession]];
+        restClient = [[DBRestClient alloc] initWithSession:[DBSession sharedSession]];
         restClient.delegate = self;
     }
     return restClient;
@@ -135,7 +134,7 @@ RMSortMode sortMode = RMAlphaSort;
 
 - (void)syncRecipes {
     NSString *cursor = [[NSUserDefaults standardUserDefaults] stringForKey:@"cursor"];
-    [self setTitle:@"Syncing recipes..."];
+    [self setTitle:@"Syncing..."];
     [[self restClient] loadDelta:cursor];
 }
 
@@ -164,7 +163,7 @@ RMSortMode sortMode = RMAlphaSort;
     fileCount = totalFiles = [entries count];
     
     if (totalFiles > 0) {
-        [self setTitle:[NSString stringWithFormat:@"Syncing recipes (0 / %d)", totalFiles]];
+        [self setTitle:[NSString stringWithFormat:@"Sync: 0 / %d", totalFiles]];
     } else {
         [self reloadRecipes];
     }
@@ -194,7 +193,7 @@ RMSortMode sortMode = RMAlphaSort;
     }
 
     fileCount--;
-    [self setTitle:[NSString stringWithFormat:@"Syncing recipes (%d / %d)", totalFiles - fileCount, totalFiles]];
+    [self setTitle:[NSString stringWithFormat:@"Sync: %d / %d", totalFiles - fileCount, totalFiles]];
     if (fileCount == 0) {
         [[Recipe managedObjectContext] save:&error];
         [self reloadRecipes];
@@ -227,7 +226,10 @@ RMSortMode sortMode = RMAlphaSort;
     
     if (sortMode == RMTagSort) {
         NSArray *sort = [NSArray arrayWithObject:[NSSortDescriptor sortDescriptorWithKey:@"name" ascending:YES]];
-        NSArray *r = [[[[self tagList] objectAtIndex:indexPath.section] recipes] sortedArrayUsingDescriptors:sort];
+        NSPredicate *p = [NSPredicate predicateWithFormat:@"deleted = %d", NO];
+        Tag *tag = [[self tagList] objectAtIndex:indexPath.section];
+        NSSet *recipeList = [tag recipes];
+        NSArray *r = [[recipeList filteredSetUsingPredicate:p] sortedArrayUsingDescriptors:sort];
         recipe = [r objectAtIndex:indexPath.row];
     } else {
         recipe = [recipes objectAtIndex:indexPath.row];

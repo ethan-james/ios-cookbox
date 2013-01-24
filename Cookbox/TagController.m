@@ -17,8 +17,11 @@
 @implementation TagController
 
 NSArray *tags;
+NSArray *taggedCache;
+NSInteger deleteRow = -1;
 
 @synthesize recipe;
+@synthesize search;
 
 - (id)initWithStyle:(UITableViewStyle)style
 {
@@ -34,11 +37,14 @@ NSArray *tags;
     [super viewDidLoad];
 
     tags = [[NSArray alloc] init];
-    // Uncomment the following line to preserve selection between presentations.
-    // self.clearsSelectionOnViewWillAppear = NO;
- 
-    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+    [self reload];
+}
+
+- (void)reload {
+    NSSortDescriptor *sort = [NSSortDescriptor sortDescriptorWithKey:@"tag" ascending:YES];
+    taggedCache = [[recipe tags] sortedArrayUsingDescriptors:[NSArray arrayWithObject:sort]];
+    [search setText:@""];
+    [[self tableView] reloadData];
 }
 
 - (void)didReceiveMemoryWarning
@@ -56,75 +62,76 @@ NSArray *tags;
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return [tags count];
+    return [tags count] + [taggedCache count];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Cell"];
     
-    [cell.textLabel setText:[tags objectAtIndex:indexPath.row]];
+    if (indexPath.row < [tags count]) {
+        [cell.textLabel setText:[tags objectAtIndex:indexPath.row]];
+        [cell setAccessoryType:UITableViewCellAccessoryNone];
+    } else {
+        Tag *t = [taggedCache objectAtIndex:indexPath.row - [tags count]];
+        [cell.textLabel setText:[t tag]];
+        [cell setAccessoryType:UITableViewCellAccessoryCheckmark];
+    }
     
     return cell;
 }
-
-/*
-// Override to support conditional editing of the table view.
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    // Return NO if you do not want the specified item to be editable.
-    return YES;
-}
-*/
-
-/*
-// Override to support editing the table view.
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    if (editingStyle == UITableViewCellEditingStyleDelete) {
-        // Delete the row from the data source
-        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-    }   
-    else if (editingStyle == UITableViewCellEditingStyleInsert) {
-        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-    }   
-}
-*/
-
-/*
-// Override to support rearranging the table view.
-- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath
-{
-}
-*/
-
-/*
-// Override to support conditional rearranging of the table view.
-- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    // Return NO if you do not want the item to be re-orderable.
-    return YES;
-}
-*/
 
 #pragma mark - Table view delegate
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    Tag *tag = [Tag findOrCreate:[tags objectAtIndex:indexPath.row]];
-    [tag addRecipesObject:recipe];
-    [tag save];
-    [self.navigationController popViewControllerAnimated:YES];
+    if (indexPath.row < [tags count]) {
+        Tag *tag = [Tag findOrCreate:[tags objectAtIndex:indexPath.row]];
+        [tag addRecipesObject:recipe];
+        [tag save];
+        deleteRow = -1;
+        [self reload];
+    } else {
+        NSInteger index = indexPath.row - [tags count];
+        Tag *t = [taggedCache objectAtIndex:index];
+        NSString *msg = [NSString stringWithFormat:@"Do you want to remove %@?", [t tag]];
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Remove tag?" message:msg delegate:self cancelButtonTitle:@"No" otherButtonTitles:@"Yes", nil];
+        
+        deleteRow = index;
+        [alert show];
+    }
 }
 
 #pragma mark UISearchBar delegate
 
 - (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText {
-    NSString *tag = [NSString stringWithFormat:@"#%@", searchText];
-    NSArray *tagArray = [[Tag search:tag] mutableArrayValueForKey:@"tag"];
+    if (searchText.length > 1) {
+        NSString *tag = [NSString stringWithFormat:@"#%@", searchText];
+        NSArray *tagArray = [[Tag search:tag] mutableArrayValueForKey:@"tag"];
 
-    tags = [[NSArray arrayWithObject:tag] arrayByAddingObjectsFromArray:tagArray];
+        if ([tagArray indexOfObject:tag] == NSNotFound) {
+            tags = [[NSArray arrayWithObject:tag] arrayByAddingObjectsFromArray:tagArray];
+        } else {
+            tags = tagArray;
+        }
+    } else {
+        tags = [[NSArray alloc] init];
+    }
+
     [self.tableView reloadData];
+}
+
+#pragma mark UIAlertView delegate
+
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
+    if (buttonIndex == 1) {
+        NSError *error;
+        AppDelegate *ad = [[UIApplication sharedApplication] delegate];
+        Tag *t = [taggedCache objectAtIndex:deleteRow];
+        [recipe removeTagsObject:t];
+        [[ad managedObjectContext] save:&error];
+        [self reload];
+    }
 }
 
 @end

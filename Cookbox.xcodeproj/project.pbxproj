@@ -22,6 +22,7 @@
 		4721772916B04C8E00D0488E /* tag.png in Resources */ = {isa = PBXBuildFile; fileRef = 4721772816B04C8E00D0488E /* tag.png */; };
 		4721773016B0705700D0488E /* Media.m in Sources */ = {isa = PBXBuildFile; fileRef = 4721772F16B0705700D0488E /* Media.m */; };
 		4721773216B0880400D0488E /* AssetsLibrary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4721773116B0880400D0488E /* AssetsLibrary.framework */; };
+		472605A816B18DEC00ACCA7A /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 472605A716B18DEC00ACCA7A /* MessageUI.framework */; };
 		4742B3461695DB7700E076AB /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 4742B3441695DB7700E076AB /* Model.xcdatamodeld */; };
 		4742B34E1695E33700E076AB /* RecipeSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 4742B34D1695E33700E076AB /* RecipeSource.m */; };
 		4742B3501695E3D000E076AB /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4742B34F1695E3D000E076AB /* CoreData.framework */; };
@@ -106,6 +107,7 @@
 		4721773116B0880400D0488E /* AssetsLibrary.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AssetsLibrary.framework; path = System/Library/Frameworks/AssetsLibrary.framework; sourceTree = SDKROOT; };
 		4721773316B08B7C00D0488E /* PhotoController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhotoController.h; sourceTree = "<group>"; };
 		4721773416B08B7C00D0488E /* PhotoController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhotoController.m; sourceTree = "<group>"; };
+		472605A716B18DEC00ACCA7A /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
 		4742B3451695DB7700E076AB /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
 		4742B34C1695E33700E076AB /* RecipeSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RecipeSource.h; sourceTree = "<group>"; };
 		4742B34D1695E33700E076AB /* RecipeSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RecipeSource.m; sourceTree = "<group>"; };
@@ -148,6 +150,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				472605A816B18DEC00ACCA7A /* MessageUI.framework in Frameworks */,
 				4721773216B0880400D0488E /* AssetsLibrary.framework in Frameworks */,
 				474853B616974F4F00EA7360 /* libGHMarkdownParser.a in Frameworks */,
 				4742B3501695E3D000E076AB /* CoreData.framework in Frameworks */,
@@ -176,6 +179,7 @@
 		4716543A163B0E14006FA8E6 = {
 			isa = PBXGroup;
 			children = (
+				472605A716B18DEC00ACCA7A /* MessageUI.framework */,
 				4721773116B0880400D0488E /* AssetsLibrary.framework */,
 				474853B71697503700EA7360 /* Default-568h@2x.png */,
 				47C2F0A616AF07A6001B2D4A /* EDStarRating.h */,
