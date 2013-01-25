@@ -285,6 +285,8 @@
 }
 #else
 -(void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event {
+    if( !editable )
+        return;
    
     UITouch *touch = [touches anyObject];
     CGPoint touchLocation = [touch locationInView:self];
