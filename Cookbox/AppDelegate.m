@@ -72,7 +72,7 @@
 
     if ([[DBSession sharedSession] handleOpenURL:url]) {
         if ([[DBSession sharedSession] isLinked]) {
-            [recipeList syncRecipes];
+//            [recipeList syncRecipes];
         }
     } else if ([[url scheme] isEqualToString:@"cookbox"]) {
         UINavigationController *nav = (UINavigationController *)self.window.rootViewController;
@@ -81,11 +81,6 @@
 
         [recipe setRecipeURL:[[NSURL alloc] initWithScheme:@"http" host:[url host] path:[url path]]];
         [nav setViewControllers:[NSArray arrayWithObjects:recipeList, recipe, nil] animated:NO];
-    } else {
-        if ([[DBSession sharedSession] isLinked]) {
-            [recipeList syncRecipes];
-        }
-        return YES;
     }
     return NO;
 }

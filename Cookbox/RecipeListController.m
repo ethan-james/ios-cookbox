@@ -134,6 +134,8 @@ RMSortMode sortMode = RMAlphaSort;
 
 - (void)syncRecipes {
     NSString *cursor = [[NSUserDefaults standardUserDefaults] stringForKey:@"cursor"];
+    if (cursor == nil) cursor = @"";
+
     [self setTitle:@"Syncing..."];
     [[self restClient] loadDelta:cursor];
 }

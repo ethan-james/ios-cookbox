@@ -132,13 +132,13 @@ NSArray *sortArray;
     [self performSegueWithIdentifier:@"ViewPhoto" sender:[collectionView cellForItemAtIndexPath:indexPath]];
 }
 
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(UICollectionViewCell *)sender {
-    if ([@"ViewPhoto" isEqualToString:segue.identifier]) {
-        PhotoController *c = [segue destinationViewController];
-        NSIndexPath *indexPath = [[self collectionView] indexPathForCell:sender];
-        Media *media = [mediaCache objectAtIndex:indexPath.row];
-//        [c setImageSrc:[media url]];
-    }
-}
+//- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(UICollectionViewCell *)sender {
+//    if ([@"ViewPhoto" isEqualToString:segue.identifier]) {
+//        PhotoController *c = [segue destinationViewController];
+//        NSIndexPath *indexPath = [[self collectionView] indexPathForCell:sender];
+//        Media *media = [mediaCache objectAtIndex:indexPath.row];
+////        [c setImageSrc:[media url]];
+//    }
+//}
 
 @end

@@ -108,11 +108,32 @@ NSInteger deleteRow = -1;
     if (searchText.length > 1) {
         NSString *tag = [NSString stringWithFormat:@"#%@", searchText];
         NSArray *tagArray = [[Tag search:tag] mutableArrayValueForKey:@"tag"];
+        NSMutableSet *tagSet = [NSMutableSet setWithArray:tagArray];
+        NSSortDescriptor *sort = [NSSortDescriptor sortDescriptorWithKey:@"self" ascending:YES];
+        NSSortDescriptor *tagSort = [NSSortDescriptor sortDescriptorWithKey:@"tag" ascending:YES];
+        NSUInteger tagAssignedIndex = [taggedCache indexOfObjectPassingTest:^BOOL(Tag *obj, NSUInteger idx, BOOL *stop) {
+            return [[obj tag] isEqualToString:tag];
+        }];
+        
+        [tagSet minusSet:[NSSet setWithArray:[taggedCache mutableArrayValueForKey:@"tag"]]];
+        tagArray = [tagSet sortedArrayUsingDescriptors:[NSArray arrayWithObject:sort]];
 
-        if ([tagArray indexOfObject:tag] == NSNotFound) {
+        if (tagAssignedIndex != NSNotFound) {
+            NSArray *before = [taggedCache subarrayWithRange:NSMakeRange(0, tagAssignedIndex)];
+            NSArray *after = [taggedCache subarrayWithRange:NSMakeRange(tagAssignedIndex + 1, [taggedCache count] - tagAssignedIndex - 1)];
+            Tag *target = [taggedCache objectAtIndex:tagAssignedIndex];
+            NSMutableArray *tagCopy = [tagArray mutableCopy];
+            
+            taggedCache = [[[NSArray arrayWithObject:target] arrayByAddingObjectsFromArray:before] arrayByAddingObjectsFromArray:after];
+            [tagCopy removeObject:tag];
+
+            tags = tagCopy;
+        } else if ([tagArray indexOfObject:tag] == NSNotFound) {
             tags = [[NSArray arrayWithObject:tag] arrayByAddingObjectsFromArray:tagArray];
+            taggedCache = [taggedCache sortedArrayUsingDescriptors:[NSArray arrayWithObject:tagSort]];
         } else {
             tags = tagArray;
+            taggedCache = [taggedCache sortedArrayUsingDescriptors:[NSArray arrayWithObject:tagSort]];
         }
     } else {
         tags = [[NSArray alloc] init];

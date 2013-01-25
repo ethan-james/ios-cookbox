@@ -18,6 +18,7 @@
 @property (nonatomic, retain) NSDate *created_at;
 
 + (Media *)new:(NSString *)url;
++ (Media *)find:(NSString *)url forRecipe:(Recipe *)recipe;
 
 - (NSError *)save;
 

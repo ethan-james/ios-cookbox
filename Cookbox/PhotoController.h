@@ -10,7 +10,7 @@
 #import "Recipe.h"
 
 @interface PhotoController : UIViewController <UIImagePickerControllerDelegate,
-UINavigationControllerDelegate>
+UINavigationControllerDelegate, UIAlertViewDelegate>
 
 @property (nonatomic, retain) Recipe *recipe;
 

@@ -19,6 +19,7 @@
 
 @synthesize recipe;
 NSInteger current;
+NSArray *sort;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -32,6 +33,7 @@ NSInteger current;
 - (void)viewDidLoad
 {
     UIBarButtonItem *addButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(addPhoto)];
+    UIBarButtonItem *trashButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemTrash target:self action:@selector(trashPhoto)];
     UISwipeGestureRecognizer *left = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(swipeLeft:)];
     UISwipeGestureRecognizer *right = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(swipeRight:)];
     
@@ -40,14 +42,15 @@ NSInteger current;
     [self.view addGestureRecognizer:left];
     [self.view addGestureRecognizer:right];
     
+    sort = [NSArray arrayWithObject:[NSSortDescriptor sortDescriptorWithKey:@"created_at" ascending:YES]];
+    
     current = 0;
-    self.navigationItem.rightBarButtonItem = addButton;
+    self.navigationItem.rightBarButtonItems = [NSArray arrayWithObjects:trashButton, addButton, nil];
     [self reload];
 }
 
 - (void)loadMedia:(NSInteger)i {
     UIImageView *v = (UIImageView *)[[self view] viewWithTag:100];
-    NSArray *sort = [NSArray arrayWithObject:[NSSortDescriptor sortDescriptorWithKey:@"created_at" ascending:YES]];
     Media *m = [[[[self recipe] media] sortedArrayUsingDescriptors:sort] objectAtIndex:i];
     
     [super viewDidLoad];
@@ -102,6 +105,28 @@ NSInteger current;
     [self startMediaBrowserFromViewController:self usingDelegate:self];
 }
 
+- (void)trashPhoto {
+    NSString *msg = [NSString stringWithFormat:@"Do you want to remove this photo?"];
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Remove photo?" message:msg delegate:self cancelButtonTitle:@"No" otherButtonTitles:@"Yes", nil];
+    
+    [alert show];
+}
+
+- (void)alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex {
+    if (buttonIndex == 1) {
+        [[[recipe.media sortedArrayUsingDescriptors:sort] objectAtIndex:current] delete];
+        if ([[recipe media] count] == 0) {
+            UIImageView *v = (UIImageView *)[[self view] viewWithTag:100];
+            [self setTitle:@"No images!"];
+            [v setImage:[[UIImage alloc] init]];
+        } else {
+            current = current % [[recipe media] count];
+            [self reload];
+            [self loadMedia:current];
+        }
+    }
+}
+
 - (BOOL) startMediaBrowserFromViewController: (UIViewController*) controller
                                usingDelegate: (id <UIImagePickerControllerDelegate,
                                                UINavigationControllerDelegate>) delegate {
@@ -131,12 +156,21 @@ NSInteger current;
 
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
     NSURL *url = [info objectForKey:@"UIImagePickerControllerReferenceURL"];
-    Media *media = [Media new:[url absoluteString]];
+    Media *media = [Media find:[url absoluteString] forRecipe:recipe];
+    NSLog(@"%@", media);
+    if (media == nil) {
+        media = [Media new:[url absoluteString]];
     
-    [media setRecipe:recipe];
-    [media setCreated_at:[NSDate date]];
-    [media save];
-    current = [[recipe media] count] - 1;
+        [media setRecipe:recipe];
+        [media setCreated_at:[NSDate date]];
+        [media save];
+        current = [[recipe media] count] - 1;
+    } else {
+        NSArray *sort = [NSArray arrayWithObject:[NSSortDescriptor sortDescriptorWithKey:@"created_at" ascending:YES]];
+
+        current = [[[[self recipe] media] sortedArrayUsingDescriptors:sort] indexOfObject:media];
+    }
+
     [self dismissModalViewControllerAnimated:YES];
     [self reload];
 }
